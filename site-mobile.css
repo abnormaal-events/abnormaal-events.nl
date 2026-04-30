@@ -29,7 +29,7 @@
 .hero-tagline { grid-column: 1 / -1; font-size: 17px; }
 .hero-meta-item .value { font-size: 15px; }
 .hero-meta-item .value.squid { font-size: 18px; }
-.hero-chain { width: 180px; height: 180px; right: -30px; bottom: -30px; }
+.hero-chain { width: 180px; height: 180px; right: -80px; bottom: -80px; opacity: 0.22; }
 
 /* date strip */
 .date-strip-inner {
@@ -46,8 +46,17 @@
 
 /* event card — stack */
 .event-card { grid-template-columns: 1fr; }
-.event-card-left { padding: 28px 24px; border-right: none; border-bottom: 2px solid var(--ink); gap: 16px; }
-.event-name { font-size: 56px !important; }
+.event-card { border-right: 2px solid var(--ink); grid-template-columns: 1fr !important; min-width: 0 !important; }
+.event-card-left { padding: 28px 24px; border-right: none !important; border-bottom: 2px solid var(--ink); gap: 16px; min-width: 0 !important; }
+.event-card-right { border-right: none !important; min-width: 0 !important; }
+.event-logo { width: 100% !important; min-width: 0 !important; }
+.event-logo-mark { width: 100% !important; max-width: 100% !important; }
+.event-name {
+  font-size: clamp(44px, 13vw, 56px) !important;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
 .event-edition { font-size: 18px; }
 .event-lineup .lineup-list { font-size: 13px; gap: 4px; }
 .event-lineup .lineup-list .name.headliner { font-size: 14px; }

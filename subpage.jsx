@@ -47,7 +47,19 @@ const Countdown = ({ target, label, tone, expiredLabel, expiredHref, expiredCta,
       </div>
       {!hideTarget && (
         <div className="countdown-target squid accent-squid">
-          {new Date(target).toLocaleString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).toLowerCase()}
+          {(() => {
+            const d = new Date(target);
+            const wd = d.toLocaleString('en-US', { weekday: 'long' });
+            const mo = d.toLocaleString('en-US', { month: 'long' });
+            const day = d.getDate();
+            const yr = d.getFullYear();
+            const ord = (n) => {
+              const v = n % 100;
+              if (v >= 11 && v <= 13) return 'th';
+              switch (n % 10) { case 1: return 'st'; case 2: return 'nd'; case 3: return 'rd'; default: return 'th'; }
+            };
+            return `${wd}, ${mo} ${day}${ord(day)}, ${yr}`;
+          })()}
         </div>
       )}
       {expired && expiredHref && expiredCta && (

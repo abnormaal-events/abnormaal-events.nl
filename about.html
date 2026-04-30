@@ -4,9 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About · Abnørmaal Festival 2026</title>
-<link rel="stylesheet" href="site.css?v=36">
+<link rel="stylesheet" href="site.css?v=69">
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 </head>
 <body data-accent="ochre" data-casing="mixed" data-squid="surgical" data-marquee="on" data-nav-surface="light">
@@ -18,12 +20,44 @@
 <script type="text/babel" src="site-tweaks.jsx"></script>
 
 <script type="text/babel">
+const AboutPage = () => (
+  <section className="about-page">
+    <div className="shell">
+      <div className="subpage-eyebrow">
+        <span className="num squid accent-squid">04</span>
+        <span>ABOUT</span>
+        <span className="dot" aria-hidden="true"></span>
+        <span className="squid accent-squid">— who we are</span>
+      </div>
+
+      <figure className="about-figure">
+        <img
+          src="assets/photos/about-team.jpeg"
+          alt="The Abnormaal crew at Bakkerskerk, Apeldoorn"
+          loading="eager"
+        />
+      </figure>
+
+      <div className="about-prose">
+        <p className="about-body">A community built on a simple idea: most nights forget themselves. Ours don't.</p>
+        <p className="about-body">Since 2023, we've been chasing the edges of house and techno. Finding floors in places that weren't built for them.</p>
+
+        <p className="about-pull"><em>House, techno, and what comes between.</em></p>
+
+        <p className="about-closer">Not for everyone.<br /><span className="accent">That's the point.</span></p>
+
+        <div className="about-divider" aria-hidden="true"></div>
+
+        <p className="about-body about-festival">The festival is where it all comes together. Outdoor, two stages, thousands of people, one full day.</p>
+      </div>
+    </div>
+  </section>
+);
+
 const App = () => (
   <div data-screen-label="About page">
     <Nav />
-    <About />
-    <Archive />
-    <Mailing />
+    <AboutPage />
     <Footer />
     <SiteTweaks />
   </div>
