@@ -50,7 +50,7 @@ const Nav = () => {
   return (
     <nav className={"nav" + (scrolled ? " is-scrolled" : "") + (hidden ? " is-hidden" : "") + (open ? " is-open" : "")}>
     <div className="nav-inner">
-      <a href="Abnormaal Festival.html#top" className="nav-logo" style={{ display: 'inline-flex', alignItems: 'center', height: '32px' }}>
+      <a href="Index.html#top" className="nav-logo" style={{ display: 'inline-flex', alignItems: 'center', height: '32px' }}>
         <img className="nav-logo-img nav-logo-img--light" src="assets/logos/logo-horizontal-texture-white.png" alt="ABNØRMAAL" />
         <img className="nav-logo-img nav-logo-img--dark" src="assets/logos/logo-horizontal-texture-purple.png" alt="" aria-hidden="true" />
       </a>
