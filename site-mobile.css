@@ -1,0 +1,107 @@
+/* Mobile-only overrides for Abnormaal site, applied inside iOS frame */
+@import url("site.css");
+
+/* In iframe, force mobile layout regardless of viewport */
+.shell { padding: 0 20px; max-width: 100%; }
+
+/* nav */
+.nav { position: relative; }
+.nav-inner { padding: 14px 20px; gap: 12px; flex-wrap: nowrap; }
+.nav-logo, .nav-logo img { height: 22px !important; }
+.nav-links { display: none; }
+.nav-cta { padding: 10px 14px; font-size: 11px; letter-spacing: 0.12em; }
+.nav-cta span { display: none; }
+
+/* hero */
+.hero-inner { padding: 32px 0 48px; }
+.hero-eyebrow {
+  flex-wrap: wrap; gap: 10px;
+  font-size: 10px; letter-spacing: 0.18em;
+  padding-bottom: 18px; margin-bottom: 24px;
+}
+.hero-eyebrow .squid { margin-left: 0; font-size: 13px; }
+.hero-edition { font-size: 36px !important; }
+.hero-bottom {
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 32px; padding-top: 24px;
+}
+.hero-tagline { grid-column: 1 / -1; font-size: 17px; }
+.hero-meta-item .value { font-size: 15px; }
+.hero-meta-item .value.squid { font-size: 18px; }
+.hero-chain { width: 180px; height: 180px; right: -30px; bottom: -30px; }
+
+/* date strip */
+.date-strip-inner {
+  flex-wrap: wrap; gap: 6px 16px;
+  padding: 0 20px; font-size: 10px; letter-spacing: 0.12em;
+}
+.date-strip .squid { font-size: 13px; }
+
+/* sections */
+.section { padding: 64px 0; }
+.section-header { margin-bottom: 32px; padding-bottom: 14px; flex-wrap: wrap; gap: 8px; }
+.section-label { font-size: 10px; }
+.section-title { font-size: 12px; }
+
+/* event card — stack */
+.event-card { grid-template-columns: 1fr; }
+.event-card-left { padding: 28px 24px; border-right: none; border-bottom: 2px solid var(--ink); gap: 16px; }
+.event-name { font-size: 56px !important; }
+.event-edition { font-size: 18px; }
+.event-lineup .lineup-list { font-size: 13px; gap: 4px; }
+.event-lineup .lineup-list .name.headliner { font-size: 14px; }
+.event-lineup .lineup-list .sep { margin: 0 6px; }
+
+.event-meta-stack { padding: 20px 24px; }
+.meta-row { padding: 12px 0; font-size: 12px; }
+.meta-row .k { font-size: 10px; letter-spacing: 0.12em; }
+.event-cta { padding: 16px 22px; font-size: 12px; letter-spacing: 0.14em; }
+
+/* marquee */
+.marquee-item { font-size: 32px; gap: 16px; }
+.marquee-item .squid { font-size: 26px; }
+.marquee-item .star { width: 22px; height: 22px; }
+.marquee-track { gap: 36px; animation-duration: 28s; }
+
+/* about */
+.about-grid { grid-template-columns: 1fr; gap: 24px; }
+.about-mark { aspect-ratio: 16/10; }
+.about-mark .stamp { width: 56px; height: 56px; top: 12px; right: 12px; }
+.about-body { font-size: 18px; }
+.about-body .squid { font-size: 22px; }
+.about-stats {
+  margin-top: 32px; padding-top: 20px;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.about-stats .stat:last-child { grid-column: 1 / -1; }
+.stat .num { font-size: 44px; }
+.stat .label { font-size: 10px; }
+.stat .label.squid { font-size: 14px; }
+
+/* archive */
+.archive-grid { grid-template-columns: 1fr; gap: 20px; }
+.archive-thumb-title { font-size: 28px; }
+
+/* mailing */
+.mailing-inner { grid-template-columns: 1fr; gap: 32px; }
+.mailing-title { font-size: 44px !important; }
+.mailing-form .row { flex-wrap: wrap; }
+.mailing-form input { font-size: 16px; min-width: 0; flex: 1 1 100%; }
+.mailing-form button { width: 100%; padding: 14px; }
+.mailing-fine { flex-direction: column; align-items: flex-start; gap: 4px; font-size: 11px; }
+
+/* footer */
+.footer { padding: 56px 0 24px; }
+.footer-wordmark { margin-bottom: 28px; }
+.footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; padding-bottom: 32px; }
+.footer-grid > div:first-child { grid-column: 1 / -1; }
+.footer-tag { font-size: 15px; }
+.footer-stamp { width: 56px; height: 56px; }
+.footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; font-size: 10px; }
+.footer-bottom .signoff { font-size: 18px; }
+.footer::before { width: 240px; height: 240px; bottom: -60px; right: -60px; }
+
+/* hide tweaks panel inside the frames */
+[data-tweaks-panel], [class*="tweaks"] { display: none !important; }

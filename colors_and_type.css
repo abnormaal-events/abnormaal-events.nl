@@ -1,0 +1,320 @@
+/* =========================================================================
+   Abnormal Events — Foundation tokens (color + type)
+   Reference everything from CSS variables; do not hardcode brand hex.
+   ========================================================================= */
+
+/* -- Webfonts ------------------------------------------------------------- */
+
+@font-face {
+  font-family: "Lenia Sans";
+  src: url("fonts/LeniaSans-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lenia Sans";
+  src: url("fonts/LeniaSans-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lenia Sans";
+  src: url("fonts/LeniaSans-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lenia Sans";
+  src: url("fonts/LeniaSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lenia Sans";
+  src: url("fonts/LeniaSans-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lenia Sans";
+  src: url("fonts/LeniaSans-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lenia Sans";
+  src: url("fonts/LeniaSans-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lenia Sans";
+  src: url("fonts/LeniaSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lenia Sans";
+  src: url("fonts/LeniaSans-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lenia Sans";
+  src: url("fonts/LeniaSans-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lenia Sans";
+  src: url("fonts/LeniaSans-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* SquidBoy — display / logotype voice */
+@font-face {
+  font-family: "SquidBoy";
+  src: url("fonts/SquidBoy-Thin.woff2") format("woff2"),
+       url("fonts/SquidBoy-Thin.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SquidBoy";
+  src: url("fonts/SquidBoy.woff2") format("woff2"),
+       url("fonts/SquidBoy.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SquidBoy";
+  src: url("fonts/SquidBoy-Bold.woff2") format("woff2"),
+       url("fonts/SquidBoy-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* =========================================================================
+   Tokens
+   ========================================================================= */
+:root {
+  /* -- Brand color palette (from /uploads/kleuren.png) ------------------ */
+  --color-amethyst:     #2A004E; /* Dark Amethyst   — Primaire kleur     */
+  --color-red-ochre:    #D62700; /* Red Ochre       — Primaire accent     */
+  --color-indigo:       #500073; /* Indigo          — Secundaire accent  */
+  --color-spicy-orange: #E04300; /* Spicy Orange    — Secundaire accent  */
+  --color-snow:         #FFF7F5; /* Snow            — Neutrale kleur     */
+  --color-white:        #FFFFFF; /* White           — Neutrale kleur     */
+  --color-black:        #0A0A0A; /* Off-black for grit                   */
+
+  /* Tints / transparencies built from brand colors */
+  --color-amethyst-90:  rgba(42, 0, 78, 0.90);
+  --color-amethyst-60:  rgba(42, 0, 78, 0.60);
+  --color-amethyst-20:  rgba(42, 0, 78, 0.20);
+  --color-red-ochre-90: rgba(214, 39, 0, 0.90);
+  --color-red-ochre-20: rgba(214, 39, 0, 0.20);
+
+  /* -- Semantic surfaces ------------------------------------------------ */
+  --bg-primary:    var(--color-amethyst);   /* default canvas: deep purple */
+  --bg-inverse:    var(--color-snow);
+  --bg-accent:     var(--color-red-ochre);
+  --bg-hot:        var(--color-spicy-orange);
+  --bg-night:      var(--color-black);
+
+  --fg-on-dark:    var(--color-snow);
+  --fg-on-dark-muted: rgba(255, 247, 245, 0.62);
+  --fg-on-light:   var(--color-amethyst);
+  --fg-on-light-muted: rgba(42, 0, 78, 0.62);
+  --fg-accent:     var(--color-red-ochre);
+
+  --border-on-dark:  rgba(255, 247, 245, 0.18);
+  --border-on-light: rgba(42, 0, 78, 0.18);
+
+  /* -- Typography ------------------------------------------------------- */
+  --font-display: "SquidBoy", "Lenia Sans", system-ui, sans-serif; /* texture/grit */
+  --font-sans:    "Lenia Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:    ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Type scale — built for posters & oversized event copy */
+  --fs-hero:    clamp(72px, 12vw, 220px);
+  --fs-display: clamp(56px, 8vw, 128px);
+  --fs-h1:      clamp(40px, 5vw, 72px);
+  --fs-h2:      clamp(32px, 3.5vw, 48px);
+  --fs-h3:      24px;
+  --fs-h4:      20px;
+  --fs-body:    16px;
+  --fs-small:   14px;
+  --fs-xs:      12px;
+
+  --lh-tight:   0.92;   /* posters / hero */
+  --lh-snug:    1.05;   /* headings */
+  --lh-normal:  1.45;   /* body */
+  --lh-loose:   1.7;    /* longform */
+
+  --tracking-tight:   -0.02em;
+  --tracking-normal:  0;
+  --tracking-wide:    0.04em;
+  --tracking-allcaps: 0.08em;
+
+  /* -- Spacing (4px base) ----------------------------------------------- */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  24px;
+  --space-6:  32px;
+  --space-7:  48px;
+  --space-8:  64px;
+  --space-9:  96px;
+  --space-10: 128px;
+
+  /* -- Radii ------------------------------------------------------------ */
+  --radius-none:  0;        /* the brand defaults to hard edges */
+  --radius-xs:    2px;      /* chips / tags ceiling             */
+  --radius-sm:    4px;      /* small buttons ceiling            */
+  --radius-md:    8px;      /* rare — modal panels only         */
+  /* No --radius-pill: full rounding is off-brand. ABNØRMAAL is not SaaS. */
+
+  /* -- Borders / lines -------------------------------------------------- */
+  --border-thin:  1px;
+  --border-md:    2px;
+  --border-thick: 4px;
+
+  /* -- Shadows (rare; used for stickers/badges) ------------------------ */
+  /* Sticker shadow scales DOWN with element size to avoid clutter:      */
+  --shadow-sticker-lg: 4px 4px 0 0 var(--color-black); /* hero buttons, lineup cards, headline blocks */
+  --shadow-sticker-md: 3px 3px 0 0 var(--color-black); /* mid-size badges, ticket-tier cards */
+  --shadow-sticker-sm: 2px 2px 0 0 var(--color-black); /* chips, tags, small buttons */
+  --shadow-sticker:    var(--shadow-sticker-lg);       /* alias for the default */
+  --shadow-card:       0 12px 40px -12px rgba(0,0,0,0.6);
+
+  /* -- Motion ----------------------------------------------------------- */
+  --ease-out:    cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.7, 0, 0.3, 1);
+  --dur-fast:    120ms;
+  --dur-base:    220ms;
+  --dur-slow:    420ms;
+}
+
+/* =========================================================================
+   Semantic element styles — opt-in via the `.abn` scope so we don't
+   stomp host pages. Use <body class="abn"> on brand pages.
+   ========================================================================= */
+
+.abn,
+.abn * {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.abn {
+  background: var(--bg-primary);
+  color: var(--fg-on-dark);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+}
+
+.abn h1, .abn .h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-h1);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.abn h2, .abn .h2 {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.abn h3, .abn .h3 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-allcaps);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.abn h4, .abn .h4 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--fs-h4);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.abn p, .abn .body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  margin: 0;
+}
+
+.abn .eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tracking-allcaps);
+  text-transform: uppercase;
+  color: var(--fg-accent);
+}
+
+.abn .meta {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: var(--fs-small);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--fg-on-dark-muted);
+}
+
+.abn .display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-display);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+}
+
+.abn .hero {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-hero);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+}
+
+.abn code, .abn .mono {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
