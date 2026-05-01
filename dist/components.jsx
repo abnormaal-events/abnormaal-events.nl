@@ -633,6 +633,8 @@ const Footer = () =>
           <a className="footer-privacy" href="privacy.html">Privacy Policy</a>
           <span aria-hidden="true">·</span>
           <a className="footer-privacy" href="terms.html">Terms &amp; Conditions</a>
+          <span aria-hidden="true">·</span>
+          <a className="footer-privacy" href="#" data-cookie-settings>Cookie settings</a>
         </span>
         <span className="signoff">show up. stay abnormal.</span>
       </div>
