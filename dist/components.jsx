@@ -374,7 +374,7 @@ const TravelLocation = () => {
         <div className="travel-frame">
           <img
             className="travel-drone"
-            src="assets/photos/location-drone.png"
+            src="assets/photos/location-drone.jpg"
             alt="Aerial view of Natuurstrook A1, Apeldoorn — a green strip wedged between industry and the A1 highway"
             loading="lazy" />
         </div>
