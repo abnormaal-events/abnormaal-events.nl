@@ -130,10 +130,11 @@ const Hero = () =>
     <div className="hero-bg"></div>
     <div className="shell hero-inner">
       <div className="hero-stage">
+        <h1 className="sr-only">ABNØRMAAL Festival — House &amp; Techno Festival Apeldoorn 2026</h1>
         <img
         className="hero-festival-logo"
         src="assets/logos/festival-logo-white.png"
-        alt=""
+        alt="ABNØRMAAL Festival 2026 logo"
         aria-label="Abnormaal Festival"
         role="img"
         loading="eager"
@@ -369,13 +370,14 @@ const TravelLocation = () => {
       <div className="shell">
         <div className="section-header">
           <div className="section-label"><span className="num squid accent-squid">02</span>TRAVEL &amp; LOCATION</div>
+          <h2 className="sr-only">Locatie: Natuurstrook A1, Apeldoorn</h2>
           <div className="section-title">— natuurstrook A1</div>
         </div>
         <div className="travel-frame">
           <img
             className="travel-drone"
             src="assets/photos/location-drone.jpg"
-            alt="Aerial view of Natuurstrook A1, Apeldoorn — a green strip wedged between industry and the A1 highway"
+            alt="Festival locatie Natuurstrook A1 Apeldoorn vanuit de lucht — outdoor house en techno festival"
             loading="lazy" />
         </div>
         <div className="travel-copy">
@@ -410,6 +412,7 @@ const Archive = () => {
       venue: "Grote Kerk, Apeldoorn",
       photo: "assets/photos/edition-02-kerk-2024.jpeg",
       link: "https://youtu.be/NcMb-DBeFgE?si=ubeJ6rVbmaHUy15S",
+      altText: "In de Kerk Apeldoorn 2024 — house en techno event",
     },
     {
       ed: "03",
@@ -441,6 +444,7 @@ const Archive = () => {
       <div className="shell">
         <div className="section-header">
           <div className="section-label"><span className="num squid accent-squid">03</span>PAST EDITIONS</div>
+          <h2 className="sr-only">Past Editions van ABNØRMAAL Festival</h2>
           <div className="section-title">— the road so far</div>
         </div>
 
@@ -459,7 +463,7 @@ const Archive = () => {
                   aria-label={`${e.name} — ${e.date} (watch aftermovie)`}
                 >
                   <div className="timeline-photo">
-                    <img src={e.photo} alt={`${e.name} — ${e.venue}`} loading="lazy" />
+                    <img src={e.photo} alt={e.altText || `${e.name} — ${e.venue}`} loading="lazy" />
                     {e.flag && <span className="timeline-flag">{e.flag}</span>}
                   </div>
                   <div className="timeline-meta">
@@ -471,7 +475,7 @@ const Archive = () => {
               ) : (
                 <div className="timeline-card timeline-card--static" aria-label={`${e.name} — ${e.date}`}>
                   <div className="timeline-photo">
-                    <img src={e.photo} alt={`${e.name} — ${e.venue}`} loading="lazy" />
+                    <img src={e.photo} alt={e.altText || `${e.name} — ${e.venue}`} loading="lazy" />
                     {e.flag && <span className="timeline-flag">{e.flag}</span>}
                   </div>
                   <div className="timeline-meta">
@@ -683,6 +687,7 @@ const Manifesto = () => {
   return (
     <section className="manifesto" id="manifesto">
       <div className="manifesto-inner">
+        <h2 className="sr-only">Het eerste outdoor house en techno festival van Apeldoorn</h2>
         <div className="manifesto-eyebrow" style={{ fontSize: "27px" }}>a first.</div>
         <p className="manifesto-body" style={{ fontFamily: "\"Lenia Sans\"" }}>Apeldoorn has clubs. Apeldoorn has had parties. But we've never had this. On September 5th, 2026, two stages open in the open air. Thousands of people. One full day of house and techno. The biggest dance-event in the city to date.
 
