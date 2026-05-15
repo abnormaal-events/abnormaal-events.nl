@@ -58,7 +58,6 @@ const Nav = () => {
         <a href="about.html">about</a>
         <a href="lineup.html">line-up</a>
         <a href="index.html#archive">past events</a>
-        <a href="tickets.html">pre-register</a>
       </div>
       <a className="nav-cta-circle" href="tickets.html" aria-label="Get ticket">
         <span className="nav-cta-circle-text" aria-hidden="true">
@@ -97,7 +96,6 @@ const MobileMenu = ({ isOpen, onClose }) => {
     { label: "about", href: "about.html" },
     { label: "line-up", href: "lineup.html" },
     { label: "past events", href: "index.html#archive" },
-    { label: "pre-register", href: "tickets.html" },
   ];
   return (
     <div className="mobile-menu" role="dialog" aria-modal="true" aria-label="Main menu">
@@ -513,70 +511,6 @@ const Archive = () => {
 
 };
 
-const Mailing = () => {
-  const [email, setEmail] = React.useState("");
-  const [done, setDone] = React.useState(false);
-  return (
-    <section className="section mailing-section" id="mailing">
-      <div className="shell">
-        <div className="section-header">
-          <div className="section-label"><span className="num squid accent-squid">04</span>PRE-REGISTER</div>
-          <div className="section-title">— first in line</div>
-        </div>
-        <div className="mailing-inner">
-          <div className="mailing-left">
-            <h2 className="mailing-title">Tickets drop<br /><em>May 8th, 2026.</em></h2>
-            <Countdown
-              target="2026-05-08T00:00:00+02:00"
-              label="Tickets live in"
-              tone="dark"
-              hideTarget
-              expiredLabel="Tickets live now"
-              expiredHref="tickets.html"
-              expiredCta="Buy tickets"
-            />
-          </div>
-          <div className="mailing-form">
-            {!done ?
-            <>
-                <div className="row">
-                  <input
-                  type="email" placeholder="your@email.nl"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' && email.includes('@')) {
-                      setDone(true);
-                      if (typeof fbq !== 'undefined') fbq('track', 'Lead');
-                      if (typeof ttq !== 'undefined') ttq.track('SubmitForm');
-                    }
-                  }} />
-                
-                  <button onClick={() => {
-                    if (email.includes('@')) {
-                      setDone(true);
-                      if (typeof fbq !== 'undefined') fbq('track', 'Lead');
-                      if (typeof ttq !== 'undefined') ttq.track('SubmitForm');
-                    }
-                  }}>pre-register</button>
-                </div>
-                <div className="mailing-fine">
-                  <span>You'll get the link 24 hours before public sale.</span>
-                  <span className="squid accent-squid">while supplies last</span>
-                </div>
-              </> :
-
-            <div className="row">
-                <span className="mailing-success">✓ you're on the list — see you 5 sep.</span>
-              </div>
-            }
-          </div>
-        </div>
-      </div>
-    </section>);
-
-};
-
 const Footer = () =>
 <footer className="footer" id="contact">
     <div className="shell">
@@ -584,7 +518,6 @@ const Footer = () =>
       <div className="footer-grid">
         <div>
           <div className="footer-tag">
-            <em>Sound system for the eyes.</em><br />
             Dance-event organisation, Netherlands.
           </div>
           <div className="footer-stamp-row">
@@ -705,4 +638,4 @@ const Manifesto = () => {
   );
 };
 
-Object.assign(window, { Nav, Hero, DateStrip, NextEvent, Marquee, Manifesto, About, TravelLocation, Archive, Mailing, Footer });
+Object.assign(window, { Nav, Hero, DateStrip, NextEvent, Marquee, Manifesto, About, TravelLocation, Archive, Footer });
