@@ -641,26 +641,31 @@ const Manifesto = () => {
   );
 };
 
-const HERO_DJ_LIST = [
-  "MISS K8",
-  "CLAESSENS",
-  "MICHEL DE HEY",
-  "D|K|OXY",
-  "D-STONE",
-  "MOODY MEHRAN",
-  "BURNR",
-  "TITI",
-  "BLNK",
-  "JO3Y3T",
-  "FREDDI B2B KARA.OKAY",
-  "IOSIO",
-  "SASHE",
-  "CONCEPT",
+const HERO_HOUSE_DJS = [
+  "MICHEL DE HEY", "D-STONE", "MOODY MEHRAN", "BURNR",
+  "FREDDI B2B KARA.OKAY", "IOSIO", "CONCEPT",
+];
+const HERO_TECHNO_DJS = [
+  "MISS K8", "CLAESSENS", "D|K|OXY", "TITI", "BLNK", "JO3Y3T", "SASHE",
 ];
 
-const HeroMarqueeSet = ({ ariaHidden }) => (
+const renderDjName = (name) => {
+  const m = name.match(/^(.+?)\s+B2B\s+(.+)$/i);
+  if (m) {
+    return (
+      <React.Fragment>
+        <span className="hero-dj-name-part">{m[1]}</span>
+        <span className="hero-dj-name-b2b">B2B</span>
+        <span className="hero-dj-name-part">{m[2]}</span>
+      </React.Fragment>
+    );
+  }
+  return name;
+};
+
+const HeroMarqueeSet = ({ list, ariaHidden }) => (
   <React.Fragment>
-    {HERO_DJ_LIST.map((name, i) => (
+    {list.map((name, i) => (
       <React.Fragment key={i}>
         <a
           href="lineup.html"
@@ -668,7 +673,7 @@ const HeroMarqueeSet = ({ ariaHidden }) => (
           aria-hidden={ariaHidden ? "true" : undefined}
           tabIndex={ariaHidden ? -1 : 0}
         >
-          {name}
+          {renderDjName(name)}
         </a>
         <span className="hero-dj-x" aria-hidden="true">×</span>
       </React.Fragment>
@@ -677,10 +682,24 @@ const HeroMarqueeSet = ({ ariaHidden }) => (
 );
 
 const HeroMarquee = () => (
-  <div className="hero-marquee" aria-label="Line-up 2026 — full DJ list">
-    <div className="hero-marquee-track">
-      <HeroMarqueeSet />
-      <HeroMarqueeSet ariaHidden />
+  <div className="hero-marquees" aria-label="Line-up 2026 — by stage">
+    <div className="hero-marquee hero-marquee--house" aria-label="Mr. Boost Arena line-up">
+      <div className="hero-marquee-logo hero-marquee-logo--left" aria-hidden="true">
+        <img src="assets/logos/mr-boost-white.svg" alt="" />
+      </div>
+      <div className="hero-marquee-track hero-marquee-track--rtl">
+        <HeroMarqueeSet list={HERO_HOUSE_DJS} />
+        <HeroMarqueeSet list={HERO_HOUSE_DJS} ariaHidden />
+      </div>
+    </div>
+    <div className="hero-marquee hero-marquee--techno" aria-label="Viper Hard Area line-up">
+      <div className="hero-marquee-track hero-marquee-track--ltr">
+        <HeroMarqueeSet list={HERO_TECHNO_DJS} />
+        <HeroMarqueeSet list={HERO_TECHNO_DJS} ariaHidden />
+      </div>
+      <div className="hero-marquee-logo hero-marquee-logo--right" aria-hidden="true">
+        <img src="assets/logos/viper-white.webp" alt="" className="viper-marquee-logo" />
+      </div>
     </div>
   </div>
 );

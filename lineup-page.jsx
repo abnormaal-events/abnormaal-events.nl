@@ -1,9 +1,9 @@
 /* Line-up 2026 — full page components */
 
 const LINEUP_ARTISTS = [
-  { id: 1,  name: "MISS K8",              role: "closing", stage: "VIPER HARD AREA", bio: "Hardcore royalty — headliner across Europe's biggest hard-dance bills. Bringing the rawest, fastest set we've ever put on.", image: "assets/lineup/miss-k8.png" },
-  { id: 2,  name: "CLAESSENS",            role: "",        stage: "VIPER HARD AREA", bio: "Belgian hard-techno phenom — the kind of set that doesn't ask for permission. Pure forward motion.", image: "assets/lineup/claessens.png" },
-  { id: 3,  name: "MICHEL DE HEY",        role: "",        stage: "BOOST ARENA",     bio: "Dutch house institution — three decades of building floors. Closing the BOOST ARENA the only way it should be closed.", image: "assets/lineup/michel-de-hey.png" },
+  { id: 1,  name: "MISS K8",              role: "hard closing", stage: "VIPER HARD AREA", bio: "", image: "assets/lineup/miss-k8.png" },
+  { id: 2,  name: "CLAESSENS",            role: "",        stage: "VIPER HARD AREA", bio: "", image: "assets/lineup/claessens.png" },
+  { id: 3,  name: "MICHEL DE HEY",        role: "",        stage: "BOOST ARENA",     bio: "", image: "assets/lineup/michel-de-hey.png" },
   { id: 4,  name: "D|K|OXY",              role: "",        stage: "VIPER HARD AREA", bio: "", image: "assets/lineup/dkoxy.png" },
   { id: 5,  name: "D-STONE",              role: "",        stage: "BOOST ARENA",     bio: "", image: "assets/lineup/d-stone.png" },
   { id: 6,  name: "MOODY MEHRAN",         role: "",        stage: "BOOST ARENA",     bio: "", image: "assets/lineup/moody-mehran.png" },
@@ -95,6 +95,11 @@ const OpeningStatement = () => {
 /* -------- Sticky filter bar with logo + text buttons -------- */
 const FilterBar = () => {
   const { filter, setFilter } = React.useContext(LineupContext);
+  const stageLabel =
+    filter === 'BOOST ARENA' ? 'Mr. Boost Arena' :
+    filter === 'VIPER HARD AREA' ? 'Viper Hard Area' :
+    'Showing all artists';
+  const isStageActive = filter !== 'all';
   return (
     <div className="lineup-filterbar" data-bg="dark" role="toolbar" aria-label="Filter line-up by stage">
       <div className="lineup-filterbar-inner">
@@ -125,15 +130,46 @@ const FilterBar = () => {
           <span>Viper Hard Area</span>
         </button>
       </div>
+      <div
+        key={filter}
+        className={"filter-stage-label" + (isStageActive ? ' filter-stage-label--active' : '')}
+        aria-live="polite"
+      >
+        {stageLabel}
+      </div>
     </div>
   );
 };
 
 /* -------- Artist tile (photo with name overlay) -------- */
+const getNameSizeClass = (name) => {
+  const clean = name.replace(/\s+B2B\s+/i, ' ').trim();
+  const length = clean.length;
+  if (length <= 8)  return 'artist-name--regular';
+  if (length <= 14) return 'artist-name--medium';
+  return 'artist-name--small';
+};
+
+const renderArtistName = (name) => {
+  const b2bMatch = name.match(/^(.+?)\s+B2B\s+(.+)$/i);
+  if (b2bMatch) {
+    const [, before, after] = b2bMatch;
+    return (
+      <React.Fragment>
+        <span className="artist-name-part">{before}</span>
+        <span className="artist-name-b2b">B2B</span>
+        <span className="artist-name-part">{after}</span>
+      </React.Fragment>
+    );
+  }
+  return name;
+};
+
 const ArtistTile = ({ artist }) => {
   const { filter, openModal } = React.useContext(LineupContext);
   const hidden = filter !== 'all' && filter !== artist.stage;
   const [failed, setFailed] = React.useState(false);
+  const sizeClass = getNameSizeClass(artist.name);
   return (
     <article
       className={"artist-card artist-card-equal" + (failed ? ' artist-card--placeholder' : '')}
@@ -163,8 +199,8 @@ const ArtistTile = ({ artist }) => {
             </div>
           )}
           <div className="artist-card-overlay" aria-hidden="true"></div>
-          <h3 className="artist-card-name-on-image">
-            {artist.name}
+          <h3 className={"artist-card-name-on-image " + sizeClass}>
+            {renderArtistName(artist.name)}
             {artist.role && <span className="artist-role-inline"> ({artist.role})</span>}
           </h3>
         </div>

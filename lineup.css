@@ -296,7 +296,29 @@ body.page-lineup .nav { position: absolute !important; }
     max-width: 56px;
     margin: 0;
   }
+  /* Stage label: visible only on mobile, sits below dots */
+  .filter-stage-label {
+    display: block;
+    margin-top: 12px;
+    font-family: "SquidBoy", "Lenia Sans", sans-serif;
+    font-size: 14px;
+    color: var(--on-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    text-align: center;
+    transition: color 0.3s ease;
+    height: 18px;
+    line-height: 18px;
+    animation: filter-stage-fade 0.3s ease;
+  }
+  .filter-stage-label--active { color: var(--accent); }
+  @keyframes filter-stage-fade {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
 }
+/* Hide stage label on desktop */
+.filter-stage-label { display: none; }
 
 /* ---- Portrait + typographic fallback ---- */
 .artist-portrait {
@@ -422,8 +444,8 @@ body.page-lineup .nav { position: absolute !important; }
 }
 .artist-card-name-on-image {
   position: absolute;
-  left: 20px;
-  right: 20px;
+  left: 16px;
+  right: 16px;
   bottom: 20px;
   margin: 0;
   font-family: "SquidBoy", "Lenia Sans", sans-serif;
@@ -434,7 +456,23 @@ body.page-lineup .nav { position: absolute !important; }
   letter-spacing: 0.02em;
   z-index: 2;
   transition: color 200ms ease;
-  word-break: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+}
+.artist-card-name-on-image.artist-name--regular { font-size: 32px; }
+.artist-card-name-on-image.artist-name--medium  { font-size: 24px; }
+.artist-card-name-on-image.artist-name--small   { font-size: 18px; }
+.artist-card-name-on-image .artist-name-part { display: inline; }
+.artist-card-name-on-image .artist-name-b2b {
+  display: inline;
+  font-family: "Lenia Sans", sans-serif;
+  font-weight: 700;
+  font-size: 0.55em;
+  color: var(--accent);
+  vertical-align: middle;
+  margin: 0 5px;
+  letter-spacing: 0.08em;
 }
 .artist-card-name-on-image .artist-role-inline {
   display: inline-block;
@@ -454,10 +492,12 @@ body.page-lineup .nav { position: absolute !important; }
   .artist-grid-section { padding: 48px 0 72px; }
   .artist-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .artist-card-name-on-image {
-    font-size: 24px;
-    left: 14px; right: 14px; bottom: 14px;
+    left: 10px; right: 10px; bottom: 14px;
   }
-  .artist-card-name-on-image .artist-role-inline { font-size: 12px; margin-left: 4px; }
+  .artist-card-name-on-image.artist-name--regular { font-size: 24px; }
+  .artist-card-name-on-image.artist-name--medium  { font-size: 18px; }
+  .artist-card-name-on-image.artist-name--small   { font-size: 14px; }
+  .artist-card-name-on-image .artist-role-inline { font-size: 11px; margin-left: 4px; }
 }
 
 /* ---- MORE TO BE ANNOUNCED + ticket CTA (continuous dark) ---- */

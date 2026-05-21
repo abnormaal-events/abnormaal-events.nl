@@ -1476,50 +1476,116 @@ body[data-nav-surface="light"] .nav:not(.is-scrolled) .nav-burger {
   color: color-mix(in oklab, var(--on-dark) 45%, transparent);
 }
 
-.hero-marquee {
+/* ---------- dual hero marquees (house + techno) ---------- */
+.hero-marquees {
   position: relative;
   z-index: 2;
+  border-top: 1px solid color-mix(in oklab, var(--accent) 60%, transparent);
+  border-bottom: 1px solid color-mix(in oklab, var(--accent) 60%, transparent);
+}
+.hero-marquee {
+  position: relative;
   overflow: hidden;
-  background: rgba(0, 0, 0, 0.18);
-  padding: 20px 0;
-  border-top: 1px solid color-mix(in oklab, var(--on-dark) 18%, transparent);
-  border-bottom: 1px solid color-mix(in oklab, var(--on-dark) 18%, transparent);
+  background: rgba(0, 0, 0, 0.22);
+  height: 64px;
+  display: flex;
+  align-items: center;
+}
+.hero-marquee--house {
+  border-bottom: 1px solid rgba(214, 39, 0, 0.3);
 }
 .hero-marquee-track {
   display: inline-flex;
   align-items: center;
   gap: 32px;
   white-space: nowrap;
-  animation: hero-marquee-scroll 60s linear infinite;
   will-change: transform;
 }
-.hero-marquee:hover .hero-marquee-track {
-  animation-play-state: paused;
+.hero-marquee-track--ltr {
+  animation: hero-marquee-scroll-ltr 34s linear infinite;
+  animation-delay: -7s;
 }
+.hero-marquee-track--rtl {
+  animation: hero-marquee-scroll-rtl 34s linear infinite;
+  animation-delay: -7s;
+}
+.hero-marquee:hover .hero-marquee-track { animation-play-state: paused; }
 .hero-dj-name {
   font-family: "SquidBoy", "Lenia Sans", sans-serif;
   color: var(--on-dark);
-  letter-spacing: 0.03em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   line-height: 1;
   text-decoration: none;
   cursor: pointer;
   transition: color 180ms ease;
   flex-shrink: 0;
-  font-size: 28px;
+  font-size: 22px;
 }
 .hero-dj-name:hover,
 .hero-dj-name:focus-visible { color: var(--accent); outline: none; }
+.hero-dj-name-part { display: inline; }
+.hero-dj-name-b2b {
+  display: inline;
+  font-family: "Lenia Sans", sans-serif;
+  font-weight: 700;
+  font-size: 0.55em;
+  color: var(--accent);
+  vertical-align: middle;
+  margin: 0 5px;
+  letter-spacing: 0.08em;
+}
 .hero-dj-x {
   font-family: "SquidBoy", sans-serif;
   color: var(--accent);
-  font-size: 18px;
+  font-size: 22px;
   line-height: 1;
   flex-shrink: 0;
 }
+.hero-marquee-logo {
+  position: absolute;
+  top: 0; bottom: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  pointer-events: none;
+}
+.hero-marquee-logo--left {
+  left: 0;
+  background: linear-gradient(to right,
+    color-mix(in oklab, var(--ink) 88%, black 12%) 0%,
+    color-mix(in oklab, var(--ink) 88%, black 12%) 70%,
+    transparent 100%);
+  padding-right: 36px;
+}
+.hero-marquee-logo--right {
+  right: 0;
+  background: linear-gradient(to left,
+    color-mix(in oklab, var(--ink) 88%, black 12%) 0%,
+    color-mix(in oklab, var(--ink) 88%, black 12%) 70%,
+    transparent 100%);
+  padding-left: 36px;
+}
+.hero-marquee-logo img {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+.hero-marquee-logo img.viper-marquee-logo {
+  height: 56px;
+  max-width: 70px;
+  margin: -12px 0;
+  object-fit: contain;
+}
 
-@keyframes hero-marquee-scroll {
+@keyframes hero-marquee-scroll-ltr {
   from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes hero-marquee-scroll-rtl {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
 }
 
 @media (max-width: 900px) {
@@ -1529,15 +1595,23 @@ body[data-nav-surface="light"] .nav:not(.is-scrolled) .nav-burger {
     margin-top: 20px;
     letter-spacing: 0.12em;
   }
-  .hero-marquee { padding: 16px 0; }
+  .hero-marquee { height: 48px; }
   .hero-marquee-track { gap: 22px; }
-  .hero-dj-name { font-size: 22px; }
-  .hero-dj-x { font-size: 14px; }
+  .hero-dj-name { font-size: 18px; }
+  .hero-dj-x { font-size: 18px; }
+  .hero-marquee-logo { padding: 0 16px; }
+  .hero-marquee-logo--left { padding-right: 28px; }
+  .hero-marquee-logo--right { padding-left: 28px; }
+  .hero-marquee-logo img { height: 24px; }
+  .hero-marquee-logo img.viper-marquee-logo { height: 44px; max-width: 56px; margin: -10px 0; }
+  .hero-marquee-track--ltr,
+  .hero-marquee-track--rtl { animation-delay: -4s; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-marquee-track { animation: none; }
 }
+
 
 /* ---------- manifesto ---------- */
 .manifesto {
