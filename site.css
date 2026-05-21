@@ -1181,6 +1181,90 @@ body[data-nav-surface="light"] .nav:not(.is-scrolled) .nav-burger {
   font-weight: 600;
 }
 
+/* Alphabetical line-up names + see-full CTA (new) */
+.event-lineup .lineup-names {
+  font-family: "SquidBoy", "Lenia Sans", sans-serif;
+  font-size: 32px;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  color: var(--accent);
+  padding: 12px 0 4px;
+  text-align: left;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 16px;
+  width: 100%;
+  max-width: 100%;
+}
+.event-lineup .lineup-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 16px;
+  white-space: nowrap;
+}
+.event-lineup .lineup-name {
+  white-space: nowrap;
+}
+.event-lineup .lineup-sep {
+  color: var(--accent);
+  font-size: 24px;
+  user-select: none;
+}
+.event-lineup .lineup-see-full {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  font-family: "Lenia Sans", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity 180ms ease;
+}
+.event-lineup .lineup-see-full:hover {
+  text-decoration: underline;
+  opacity: 0.85;
+}
+@media (max-width: 900px) {
+  .event-lineup .lineup-names { font-size: 22px; gap: 6px 12px; }
+  .event-lineup .lineup-item { gap: 12px; }
+  .event-lineup .lineup-sep { font-size: 18px; }
+  .event-lineup .lineup-see-full { font-size: 12px; }
+}
+
+/* Sold-out tier */
+.ticket-tier--sold {
+  opacity: 0.7;
+  pointer-events: none;
+  cursor: not-allowed;
+  border-color: color-mix(in oklab, var(--accent) 60%, transparent) !important;
+  position: relative;
+}
+.ticket-tier--sold .ticket-tier-price {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+.ticket-tier-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--accent);
+  color: #ffffff;
+  font-family: "Lenia Sans", sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  line-height: 1;
+  z-index: 2;
+  white-space: nowrap;
+}
+
 .event-card-right {
   padding: 0;
   display: flex; flex-direction: column;
@@ -1368,6 +1452,91 @@ body[data-nav-surface="light"] .nav:not(.is-scrolled) .nav-burger {
     font-size: 10px;
     letter-spacing: 0.03em;
   }
+}
+
+/* ---------- hero info line + DJ marquee ---------- */
+.hero-info-line {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  font-family: "Lenia Sans", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--on-dark);
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.hero-info-line .hero-info-dot {
+  color: color-mix(in oklab, var(--on-dark) 45%, transparent);
+}
+
+.hero-marquee {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.18);
+  padding: 20px 0;
+  border-top: 1px solid color-mix(in oklab, var(--on-dark) 18%, transparent);
+  border-bottom: 1px solid color-mix(in oklab, var(--on-dark) 18%, transparent);
+}
+.hero-marquee-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 32px;
+  white-space: nowrap;
+  animation: hero-marquee-scroll 60s linear infinite;
+  will-change: transform;
+}
+.hero-marquee:hover .hero-marquee-track {
+  animation-play-state: paused;
+}
+.hero-dj-name {
+  font-family: "SquidBoy", "Lenia Sans", sans-serif;
+  color: var(--on-dark);
+  letter-spacing: 0.03em;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 180ms ease;
+  flex-shrink: 0;
+  font-size: 28px;
+}
+.hero-dj-name:hover,
+.hero-dj-name:focus-visible { color: var(--accent); outline: none; }
+.hero-dj-x {
+  font-family: "SquidBoy", sans-serif;
+  color: var(--accent);
+  font-size: 18px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+@keyframes hero-marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (max-width: 900px) {
+  .hero-info-line {
+    font-size: 14px;
+    gap: 12px;
+    margin-top: 20px;
+    letter-spacing: 0.12em;
+  }
+  .hero-marquee { padding: 16px 0; }
+  .hero-marquee-track { gap: 22px; }
+  .hero-dj-name { font-size: 22px; }
+  .hero-dj-x { font-size: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-marquee-track { animation: none; }
 }
 
 /* ---------- manifesto ---------- */
@@ -2641,8 +2810,8 @@ body[data-squid="off"] .accent-squid { font-family: "Lenia Sans" !important; fon
     min-height: 48px;
   }
 
-  /* No horizontal scroll insurance */
-  body, html { overflow-x: hidden; }
+  /* No horizontal scroll insurance — use 'clip' so position:sticky still works on descendants */
+  body, html { overflow-x: clip; }
 }
 
 
