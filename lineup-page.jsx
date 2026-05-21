@@ -200,8 +200,8 @@ const ArtistTile = ({ artist }) => {
           )}
           <div className="artist-card-overlay" aria-hidden="true"></div>
           <h3 className={"artist-card-name-on-image " + sizeClass}>
+            {artist.role && <span className="artist-role-inline">({artist.role})</span>}
             {renderArtistName(artist.name)}
-            {artist.role && <span className="artist-role-inline"> ({artist.role})</span>}
           </h3>
         </div>
       </button>

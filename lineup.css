@@ -260,7 +260,7 @@ body.page-lineup .nav { position: absolute !important; }
   }
 }
 @media (max-width: 768px) {
-  .lineup-filterbar { top: 20px; padding: 24px 16px; height: auto; }
+  .lineup-filterbar { top: 20px; padding: 24px 16px; height: auto; flex-direction: column; align-items: center; }
   .lineup-filterbar-inner {
     flex-direction: row;
     justify-content: center;
@@ -317,8 +317,10 @@ body.page-lineup .nav { position: absolute !important; }
     to   { opacity: 1; transform: translateY(0); }
   }
 }
-/* Hide stage label on desktop */
-.filter-stage-label { display: none; }
+/* Hide stage label on desktop only */
+@media (min-width: 769px) {
+  .filter-stage-label { display: none; }
+}
 
 /* ---- Portrait + typographic fallback ---- */
 .artist-portrait {
@@ -475,15 +477,16 @@ body.page-lineup .nav { position: absolute !important; }
   letter-spacing: 0.08em;
 }
 .artist-card-name-on-image .artist-role-inline {
-  display: inline-block;
+  display: block;
   font-family: "Lenia Sans", sans-serif;
   font-weight: 700;
   font-size: 14px;
   color: var(--accent);
   letter-spacing: 0.04em;
   text-transform: lowercase;
-  margin-left: 6px;
-  vertical-align: baseline;
+  margin: 0 0 4px 0;
+  line-height: 1;
+  text-align: center;
 }
 @media (max-width: 1024px) {
   .artist-grid { grid-template-columns: repeat(2, 1fr); }
@@ -497,7 +500,7 @@ body.page-lineup .nav { position: absolute !important; }
   .artist-card-name-on-image.artist-name--regular { font-size: 24px; }
   .artist-card-name-on-image.artist-name--medium  { font-size: 18px; }
   .artist-card-name-on-image.artist-name--small   { font-size: 14px; }
-  .artist-card-name-on-image .artist-role-inline { font-size: 11px; margin-left: 4px; }
+  .artist-card-name-on-image .artist-role-inline { font-size: 11px; margin-bottom: 2px; }
 }
 
 /* ---- MORE TO BE ANNOUNCED + ticket CTA (continuous dark) ---- */
