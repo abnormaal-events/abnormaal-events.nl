@@ -209,7 +209,7 @@ const NextEvent = () => {
                 <span className="tba-text">to be announced</span>
               </div>
               <Countdown
-                target="2026-05-22T00:00:00+02:00"
+                target="2026-05-22T12:00:00+02:00"
                 label="Line-up reveal in"
                 tone="light"
                 hideTarget
