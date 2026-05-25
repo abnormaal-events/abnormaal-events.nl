@@ -1,0 +1,661 @@
+/* === Line-up 2026 page === */
+
+/* Page-level dark bg */
+body { background: var(--ink); }
+
+/* ---- Solid purple area below the hero (same as footer #26094B) ---- */
+.lineup-dark-wrap {
+  position: relative;
+  background-color: #26094B;
+  isolation: isolate;
+}
+.lineup-dark-wrap > * { position: relative; background-color: transparent; }
+.lineup-dark-wrap .artist-grid-section,
+.lineup-dark-wrap .lineup-more {
+  background-image: none;
+  background-color: transparent;
+}
+
+/* ---- Hero zone with photo background (clipped) ---- */
+.lineup-hero-zone {
+  position: relative;
+  background-color: var(--ink);
+  overflow: hidden;
+  isolation: isolate;
+}
+.lineup-hero-zone-photo {
+  position: absolute;
+  inset: 0;
+  background-image: url("assets/backgrounds/bg-social-7.png");
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+.lineup-hero-zone-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(42, 0, 78, 0.78);
+  z-index: 1;
+}
+.lineup-hero-zone-grain {
+  position: absolute;
+  inset: 0;
+  background-image: url("assets/backgrounds/bg-social-7.png");
+  background-size: cover;
+  opacity: 0.10;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 2;
+}
+.lineup-hero-zone > .lineup-opening--compact,
+.lineup-hero-zone > .lineup-filterbar { position: relative; z-index: 3; }
+
+/* ---- Nav: transparent over dark, dark text over light sections ---- */
+body .nav,
+body .nav.is-scrolled,
+body .nav:not(.is-scrolled) {
+  background: transparent;
+  border-bottom: none;
+  box-shadow: none;
+  transition: background 0.3s ease;
+}
+/* Definitive override: keep nav WHITE on every state of the lineup page */
+body.page-lineup .nav .nav-logo-img--light { opacity: 1 !important; }
+body.page-lineup .nav .nav-logo-img--dark  { opacity: 0 !important; }
+body.page-lineup .nav .nav-links { color: var(--on-dark) !important; }
+body.page-lineup .nav .nav-links a.active::after { background: var(--on-dark) !important; }
+body.page-lineup .nav .nav-burger { color: var(--on-dark) !important; border-color: rgba(255,247,245,0.45) !important; }
+body.page-lineup .nav .nav-cta-circle { border-color: var(--on-dark) !important; color: var(--on-dark) !important; }
+
+body .nav .nav-logo-img--light { opacity: 1; }
+body .nav .nav-logo-img--dark  { opacity: 0; }
+body .nav .nav-links { color: var(--on-dark); }
+body .nav .nav-links a:hover { color: var(--accent); }
+body .nav .nav-links a.active::after { background: var(--on-dark); }
+body .nav .nav-burger { color: var(--on-dark); border-color: rgba(255,247,245,0.45); }
+body .nav .nav-cta-circle {
+  border-color: var(--on-dark);
+  color: var(--on-dark);
+  z-index: 1100;
+}
+body .nav { z-index: 1000; }
+
+/* ---- Opening (compact, inside hero zone) ---- */
+.lineup-opening--compact {
+  min-height: auto;
+  padding: 144px 24px 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--on-dark);
+  position: relative;
+  overflow: hidden;
+}
+.lineup-opening--compact .lineup-opening-inner {
+  gap: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.lineup-opening--compact .lineup-opening-eyebrow {
+  margin: 0;
+  font-family: "Lenia Sans", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.lineup-opening--compact .lineup-opening-title {
+  margin: 0;
+  font-family: "SquidBoy", "Lenia Sans", sans-serif;
+  font-size: clamp(28px, 4.5vw, 48px);
+  line-height: 1.1;
+  color: var(--on-dark);
+  max-width: 900px;
+  letter-spacing: -0.005em;
+  font-weight: 400;
+  text-align: center;
+}
+@media (max-width: 900px) {
+  .lineup-opening--compact {
+    padding: 96px 20px 40px;
+  }
+  .lineup-opening--compact .lineup-opening-title { font-size: 28px; }
+}
+
+/* Opening grain bg disabled (wrap provides grain) */
+.lineup-opening-grain { display: none; }
+.lineup-opening-inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 1200px;
+  width: 100%;
+}
+.lineup-opening-title .word { display: inline-block; }
+
+/* Lineup-only: make nav scroll away with the page (not sticky) */
+body.page-lineup .nav { position: absolute !important; }
+
+/* White hero/content divider with travelling pulse */
+.lineup-hero-divider {
+  position: relative;
+  width: 100%;
+  height: 3px;
+  background-color: rgba(255, 255, 255, 0.55);
+  overflow: hidden;
+}
+.lineup-hero-divider::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  left: -30%;
+  width: 30%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.7) 35%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(255, 255, 255, 0.7) 65%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  box-shadow:
+    0 0 12px rgba(255, 255, 255, 0.9),
+    0 0 28px rgba(255, 255, 255, 0.55);
+  filter: blur(1px);
+  animation: lineup-pulse-sweep 2.4s linear infinite;
+}
+@keyframes lineup-pulse-sweep {
+  0%   { left: -30%; }
+  100% { left: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lineup-hero-divider::after { animation: none; }
+}
+
+/* ---- Sticky filter (floating buttons, no bar background) ---- */
+.lineup-filterbar {
+  position: sticky;
+  top: 20px;
+  z-index: 900;
+  background-color: transparent;
+  border-bottom: none;
+  display: flex;
+  align-items: center;
+  box-shadow: none;
+  padding: 48px 24px;
+  height: auto;
+  pointer-events: none;
+}
+.lineup-filterbar.is-sticky { box-shadow: none; background-color: transparent; }
+.lineup-filterbar-inner {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 16px;
+  width: auto;
+  margin: 0 auto;
+  pointer-events: auto;
+}
+.lineup-filter-btn {
+  background-color: rgba(75, 35, 130, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--on-dark);
+  border: 1px solid var(--on-dark);
+  border-radius: 4px;
+  padding: 16px 24px;
+  font-family: "SquidBoy", "Lenia Sans", sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 90px;
+  min-width: 180px;
+  transition: background 220ms ease, border-color 220ms ease, transform 220ms ease;
+}
+.lineup-filter-btn:hover {
+  border-color: var(--accent);
+  transform: scale(1.03);
+}
+.lineup-filter-btn.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  transform: none;
+}
+.lineup-filter-btn img {
+  height: 36px;
+  width: auto;
+  display: block;
+}
+.lineup-filter-btn .viper-logo {
+  height: 72px;
+  width: auto;
+  margin: -18px 0;
+  object-fit: contain;
+}
+.lineup-filter-btn .all-logo {
+  height: 44px;
+  width: auto;
+  margin: 0;
+  object-fit: contain;
+}
+@media (max-width: 768px) {
+  .lineup-filter-btn .viper-logo {
+    height: 56px;
+    margin: -14px 0;
+  }
+  .lineup-filter-btn .all-logo {
+    height: 34px;
+    margin: 0;
+  }
+}
+@media (max-width: 768px) {
+  .lineup-filterbar { top: 20px; padding: 24px 16px; height: auto; flex-direction: column; align-items: center; }
+  .lineup-filterbar-inner {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    width: auto;
+  }
+  .lineup-filter-btn {
+    width: 64px;
+    height: 64px;
+    min-width: 0;
+    padding: 0;
+    border-radius: 50%;
+    font-family: "SquidBoy", "Lenia Sans", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    gap: 0;
+    flex-direction: row;
+    overflow: hidden;
+  }
+  .lineup-filter-btn:active { transform: scale(0.95); }
+  /* Show only the logo on logo buttons (hide their text label) */
+  .lineup-filter-btn:has(img) span { display: none; }
+  .lineup-filter-btn img {
+    height: 28px;
+    width: auto;
+    max-width: 44px;
+    margin: 0;
+    object-fit: contain;
+  }
+  .lineup-filter-btn .viper-logo {
+    height: 52px;
+    max-width: 56px;
+    margin: 0;
+  }
+  /* Stage label: visible only on mobile, sits below dots */
+  .filter-stage-label {
+    display: block;
+    margin-top: 12px;
+    font-family: "SquidBoy", "Lenia Sans", sans-serif;
+    font-size: 14px;
+    color: var(--on-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    text-align: center;
+    transition: color 0.3s ease;
+    height: 18px;
+    line-height: 18px;
+    animation: filter-stage-fade 0.3s ease;
+  }
+  .filter-stage-label--active { color: var(--accent); }
+  @keyframes filter-stage-fade {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+/* Hide stage label on desktop only */
+@media (min-width: 769px) {
+  .filter-stage-label { display: none; }
+}
+
+/* ---- Portrait + typographic fallback ---- */
+.artist-portrait {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, color-mix(in oklab, var(--ink) 80%, black 20%), var(--ink));
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+}
+.artist-portrait img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.artist-portrait-fallback {
+  position: absolute; inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.artist-portrait-fallback-name {
+  font-family: "SquidBoy", "Lenia Sans", sans-serif;
+  font-size: clamp(36px, 6vw, 84px);
+  color: color-mix(in oklab, var(--on-dark) 22%, transparent);
+  text-align: center;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  word-break: break-word;
+}
+.artist-portrait-grain {
+  position: absolute; inset: 0;
+  background-image: url("assets/backgrounds/bg-social-7.png");
+  background-size: cover;
+  opacity: 0.18;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  transition: opacity 220ms ease, transform 320ms ease;
+}
+
+/* ---- Artist grid (all 14 equal, photo with name overlay) ---- */
+.artist-grid-section {
+  background: transparent;
+  color: var(--on-dark);
+  padding: 64px 0 96px;
+}
+.artist-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.artist-card { will-change: transform, opacity; }
+.artist-card-equal {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.artist-card-equal-btn {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  padding: 0;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+.artist-card-equal:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 24px rgba(214, 39, 0, 0.4);
+}
+.artist-card-equal:hover .artist-card-name-on-image { color: var(--accent); }
+.artist-card-equal-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+.artist-card-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #26094B;
+}
+.artist-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.artist-card-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.artist-card-fallback-name {
+  font-family: "SquidBoy", "Lenia Sans", sans-serif;
+  font-size: clamp(28px, 5vw, 56px);
+  color: color-mix(in oklab, var(--on-dark) 22%, transparent);
+  text-align: center;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  word-break: break-word;
+}
+.artist-card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 55%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  pointer-events: none;
+}
+.artist-card-name-on-image {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 20px;
+  margin: 0;
+  font-family: "SquidBoy", "Lenia Sans", sans-serif;
+  font-size: 32px;
+  line-height: 1.05;
+  color: var(--on-dark);
+  text-align: center;
+  letter-spacing: 0.02em;
+  z-index: 2;
+  transition: color 200ms ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+}
+.artist-card-name-on-image.artist-name--regular { font-size: 32px; }
+.artist-card-name-on-image.artist-name--medium  { font-size: 24px; }
+.artist-card-name-on-image.artist-name--small   { font-size: 18px; }
+.artist-card-name-on-image .artist-name-part { display: inline; }
+.artist-card-name-on-image .artist-name-b2b {
+  display: inline;
+  font-family: "Lenia Sans", sans-serif;
+  font-weight: 700;
+  font-size: 0.55em;
+  color: var(--accent);
+  vertical-align: middle;
+  margin: 0 5px;
+  letter-spacing: 0.08em;
+}
+.artist-card-name-on-image .artist-role-inline {
+  display: block;
+  font-family: "Lenia Sans", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  margin: 0 0 4px 0;
+  line-height: 1;
+  text-align: center;
+}
+@media (max-width: 1024px) {
+  .artist-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .artist-grid-section { padding: 48px 0 72px; }
+  .artist-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .artist-card-name-on-image {
+    left: 10px; right: 10px; bottom: 14px;
+  }
+  .artist-card-name-on-image.artist-name--regular { font-size: 24px; }
+  .artist-card-name-on-image.artist-name--medium  { font-size: 18px; }
+  .artist-card-name-on-image.artist-name--small   { font-size: 14px; }
+  .artist-card-name-on-image .artist-role-inline { font-size: 11px; margin-bottom: 2px; }
+}
+
+/* ---- MORE TO BE ANNOUNCED + ticket CTA (continuous dark) ---- */
+.lineup-more {
+  background: transparent;
+  color: var(--on-dark);
+  padding: 96px 0 128px;
+  border-top: none;
+  text-align: center;
+}
+.lineup-more-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 0 24px;
+}
+.lineup-more-title {
+  font-family: "SquidBoy", "Lenia Sans", sans-serif;
+  font-size: clamp(36px, 5vw, 56px);
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  line-height: 1;
+  margin: 0;
+  font-weight: 400;
+}
+.lineup-more-sub {
+  font-family: "Lenia Sans", sans-serif;
+  font-size: 16px;
+  color: var(--on-dark);
+  margin: 0;
+  max-width: 600px;
+}
+.lineup-more-cta {
+  margin-top: 36px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--accent);
+  color: #fff;
+  padding: 20px 48px;
+  font-family: "SquidBoy", "Lenia Sans", sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  transition: transform 220ms cubic-bezier(0.2,0.8,0.2,1), box-shadow 220ms;
+}
+.lineup-more-cta:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 28px rgba(214, 39, 0, 0.55);
+}
+@media (max-width: 900px) {
+  .lineup-more { padding: 64px 0 80px; }
+  .lineup-more-title { font-size: 36px; }
+  .lineup-more-sub { font-size: 14px; }
+  .lineup-more-cta {
+    padding: 16px 32px;
+    font-size: 16px;
+    width: 100%;
+    max-width: 360px;
+    justify-content: center;
+    margin-top: 28px;
+  }
+}
+
+/* ---- Modal ---- */
+.lineup-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: color-mix(in oklab, var(--ink) 92%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+  animation: lineup-modal-fade 0.25s ease;
+}
+@keyframes lineup-modal-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.lineup-modal {
+  background: var(--ink);
+  color: var(--on-dark);
+  border: 1px solid var(--accent);
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: lineup-modal-scale 0.3s ease;
+}
+@keyframes lineup-modal-scale {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.lineup-modal-close {
+  position: absolute;
+  top: 10px; right: 10px;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid color-mix(in oklab, var(--accent) 80%, transparent);
+  color: var(--accent);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  width: 38px; height: 38px;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 2;
+  transition: background 180ms;
+}
+.lineup-modal-close:hover { background: var(--accent); color: var(--paper); }
+.lineup-modal-portrait {
+  aspect-ratio: 16 / 10;
+  width: 100%;
+  position: relative;
+}
+.lineup-modal-body { padding: 28px 32px 32px; }
+.lineup-modal-name {
+  font-family: "SquidBoy", "Lenia Sans", sans-serif;
+  font-size: clamp(36px, 5vw, 48px);
+  color: var(--on-dark);
+  margin: 0;
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+.lineup-modal-role {
+  display: inline-block;
+  margin-top: 10px;
+  font-family: "Lenia Sans", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+}
+.lineup-modal-bio {
+  font-family: "Lenia Sans", sans-serif;
+  font-size: 15px;
+  padding-top: 18px;
+  line-height: 1.55;
+  color: color-mix(in oklab, var(--on-dark) 85%, transparent);
+}
+@media (max-width: 600px) {
+  .lineup-modal-body { padding: 22px 22px 28px; }
+}
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .lineup-modal-overlay,
+  .lineup-modal { animation: none; }
+  .artist-card-equal-btn:hover { transform: none; }
+  .lineup-filter-btn:hover { transform: none; }
+}
