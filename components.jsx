@@ -138,7 +138,7 @@ const Hero = () =>
         muted
         playsInline
         preload="auto"
-        style={{ opacity: "1", margin: "3px", objectFit: "contain", width: "100%", maxWidth: "633px" }} />
+        style={{ opacity: "1", margin: "3px", objectFit: "contain", width: "100%", maxWidth: "633px", mixBlendMode: "screen" }} />
         <div className="hero-actions">
           <a href="tickets.html" className="hero-btn hero-btn--primary" onClick={() => {
             if (typeof fbq !== 'undefined') {
