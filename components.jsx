@@ -129,16 +129,15 @@ const Hero = () =>
     <div className="shell hero-inner">
       <div className="hero-stage">
         <h1 className="sr-only">ABNØRMAAL Festival — House &amp; Techno Festival Apeldoorn 2026</h1>
-        <video
+        <img
         className="hero-festival-logo"
-        src="assets/video/festival-logo-writing.webm"
-        poster="assets/logos/festival-logo-white.png"
+        src="assets/logos/festival-logo-white.png"
+        alt="ABNØRMAAL Festival 2026 logo"
         aria-label="Abnormaal Festival"
-        autoPlay
-        muted
-        playsInline
-        preload="auto"
-        style={{ opacity: "1", margin: "3px", objectFit: "contain", width: "100%", maxWidth: "633px", mixBlendMode: "screen" }} />
+        role="img"
+        loading="eager"
+        decoding="async"
+        style={{ opacity: "1", margin: "3px", objectFit: "contain", width: "100%", maxWidth: "633px" }} />
         <div className="hero-actions">
           <a href="tickets.html" className="hero-btn hero-btn--primary" onClick={() => {
             if (typeof fbq !== 'undefined') {
@@ -161,24 +160,16 @@ const Hero = () =>
             </span>
           </a>
         </div>
-      </div>
-      <div className="hero-info">
-        <div className="hero-info-item">
-          <div className="label">Date</div>
-          <div className="value">September 5<sup>th</sup>, 2026</div>
-        </div>
-        <div className="hero-info-divider"></div>
-        <div className="hero-info-item">
-          <div className="label">Location</div>
-          <div className="value">Natuurstrook A1, Apeldoorn</div>
-        </div>
-        <div className="hero-info-divider"></div>
-        <div className="hero-info-item">
-          <div className="label">Programme</div>
-          <div className="value">Two stages — <em style={{ color: "rgb(255, 255, 255)" }}>House</em> &amp; <em style={{ color: "rgb(255, 255, 255)" }}>Techno</em></div>
+        <div className="hero-info-line">
+          <span>SEP 5, 2026</span>
+          <span className="hero-info-dot" aria-hidden="true">·</span>
+          <span>APELDOORN</span>
+          <span className="hero-info-dot" aria-hidden="true">·</span>
+          <span>HOUSE × TECHNO</span>
         </div>
       </div>
     </div>
+    <HeroMarquee />
     <div className="hero-chain"></div>
   </section>;const DateStrip = () => <div className="date-strip" style={{ backgroundColor: "rgb(214, 0, 0)" }}>
     <div className="date-strip-inner">
@@ -205,17 +196,22 @@ const NextEvent = () => {
             </a>
             <div className="event-lineup">
               <div className="lineup-label">Line-up · house & techno</div>
-              <div className="lineup-tba">
-                <span className="tba-mark squid accent-squid">T.B.A.</span>
-                <span className="tba-text">to be announced</span>
+              <div className="lineup-names">
+                {[
+                  "BLNK", "BURNR", "CLAESSENS", "CONCEPT", "D|K|OXY", "D-STONE",
+                  "FREDDI B2B KARA.OKAY", "IOSIO", "JO3Y3T", "MICHEL DE HEY",
+                  "MISS K8", "MOODY MEHRAN", "SASHE", "TITI"
+                ].map((name, i, arr) => (
+                  <span key={name} className="lineup-item">
+                    <span className="lineup-name">{name}</span>
+                    {i < arr.length - 1 && <span className="lineup-sep" aria-hidden="true">×</span>}
+                  </span>
+                ))}
               </div>
-              <Countdown
-                target="2026-05-22T12:00:00+02:00"
-                label="Line-up reveal in"
-                tone="light"
-                hideTarget
-                expiredLabel="Line-up revealed"
-              />
+              <a href="lineup.html" className="lineup-see-full">
+                <span>See full line-up</span>
+                <span aria-hidden="true">→</span>
+              </a>
             </div>
           </div>
           <div className="event-card-right">
@@ -227,22 +223,28 @@ const NextEvent = () => {
               <div className="meta-row"><span className="k">stages</span><span className="v">02 — house & techno</span></div>
             </div>
             <div className="ticket-tier-grid">
-              <a href="tickets.html" className="ticket-tier" data-status="not-yet">
-                <div className="ticket-tier-name">Blind Tickets</div>
-                <div className="ticket-tier-price">€44,95</div>
-              </a>
-              <a href="tickets.html" className="ticket-tier" data-status="not-yet">
-                <div className="ticket-tier-name">Early Bird</div>
-                <div className="ticket-tier-price">€49,95</div>
-              </a>
-              <a href="tickets.html" className="ticket-tier" data-status="not-yet">
-                <div className="ticket-tier-name">Regular Bird</div>
-                <div className="ticket-tier-price">€54,95</div>
-              </a>
-              <a href="tickets.html" className="ticket-tier" data-status="not-yet">
-                <div className="ticket-tier-name">Late Bird</div>
-                <div className="ticket-tier-price">€59,95</div>
-              </a>
+              {[
+                { tier: "Blind Tickets", price: "€44,95", status: "sold_out" },
+                { tier: "Early Bird",    price: "€49,95", status: "available" },
+                { tier: "Regular Bird",  price: "€54,95", status: "available" },
+                { tier: "Late Bird",     price: "€59,95", status: "available" },
+              ].map((t) => {
+                const isSold = t.status === "sold_out";
+                return (
+                  <a
+                    key={t.tier}
+                    href={isSold ? undefined : "tickets.html"}
+                    className={"ticket-tier" + (isSold ? " ticket-tier--sold" : "")}
+                    data-status={isSold ? "sold-out" : "not-yet"}
+                    aria-disabled={isSold ? "true" : undefined}
+                    tabIndex={isSold ? -1 : 0}
+                  >
+                    {isSold && <span className="ticket-tier-badge">Sold out</span>}
+                    <div className="ticket-tier-name">{t.tier}</div>
+                    <div className="ticket-tier-price">{t.price}</div>
+                  </a>
+                );
+              })}
             </div>
             <a href="tickets.html" className="event-cta event-cta--tickets">
               <span>tickets</span><span className="arrow">→</span>
@@ -639,4 +641,67 @@ const Manifesto = () => {
   );
 };
 
-Object.assign(window, { Nav, Hero, DateStrip, NextEvent, Marquee, Manifesto, About, TravelLocation, Archive, Footer });
+const HERO_HOUSE_DJS = [
+  "MICHEL DE HEY", "D-STONE", "MOODY MEHRAN", "BURNR",
+  "FREDDI B2B KARA.OKAY", "IOSIO", "CONCEPT",
+];
+const HERO_TECHNO_DJS = [
+  "MISS K8", "CLAESSENS", "D|K|OXY", "TITI", "BLNK", "JO3Y3T", "SASHE",
+];
+
+const renderDjName = (name) => {
+  const m = name.match(/^(.+?)\s+B2B\s+(.+)$/i);
+  if (m) {
+    return (
+      <React.Fragment>
+        <span className="hero-dj-name-part">{m[1]}</span>
+        <span className="hero-dj-name-b2b">B2B</span>
+        <span className="hero-dj-name-part">{m[2]}</span>
+      </React.Fragment>
+    );
+  }
+  return name;
+};
+
+const HeroMarqueeSet = ({ list, ariaHidden }) => (
+  <React.Fragment>
+    {list.map((name, i) => (
+      <React.Fragment key={i}>
+        <a
+          href="lineup.html"
+          className="hero-dj-name"
+          aria-hidden={ariaHidden ? "true" : undefined}
+          tabIndex={ariaHidden ? -1 : 0}
+        >
+          {renderDjName(name)}
+        </a>
+        <span className="hero-dj-x" aria-hidden="true">×</span>
+      </React.Fragment>
+    ))}
+  </React.Fragment>
+);
+
+const HeroMarquee = () => (
+  <div className="hero-marquees" aria-label="Line-up 2026 — by stage">
+    <div className="hero-marquee hero-marquee--house" aria-label="Mr. Boost Arena line-up">
+      <div className="hero-marquee-logo hero-marquee-logo--left" aria-hidden="true">
+        <img src="assets/logos/mr-boost-white.svg" alt="" />
+      </div>
+      <div className="hero-marquee-track hero-marquee-track--rtl">
+        <HeroMarqueeSet list={HERO_HOUSE_DJS} />
+        <HeroMarqueeSet list={HERO_HOUSE_DJS} ariaHidden />
+      </div>
+    </div>
+    <div className="hero-marquee hero-marquee--techno" aria-label="Viper Hard Area line-up">
+      <div className="hero-marquee-track hero-marquee-track--ltr">
+        <HeroMarqueeSet list={HERO_TECHNO_DJS} />
+        <HeroMarqueeSet list={HERO_TECHNO_DJS} ariaHidden />
+      </div>
+      <div className="hero-marquee-logo hero-marquee-logo--right" aria-hidden="true">
+        <img src="assets/logos/viper-white.webp" alt="" className="viper-marquee-logo" />
+      </div>
+    </div>
+  </div>
+);
+
+Object.assign(window, { Nav, Hero, DateStrip, NextEvent, Marquee, Manifesto, About, TravelLocation, Archive, HeroMarquee, Footer });
