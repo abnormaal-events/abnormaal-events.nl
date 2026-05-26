@@ -136,7 +136,7 @@ const Hero = () =>
         poster="assets/logos/festival-logo-white.png"
         className="hero-festival-logo"
         aria-label="Abnormaal Festival"
-        style={{ opacity: "1", margin: "3px", objectFit: "contain", width: "100%", maxWidth: "633px" }}>
+        style={{ opacity: "1", margin: "3px", objectFit: "contain", width: "100%", maxWidth: "633px", mixBlendMode: "screen" }}>
           <source src="assets/logos/festival_logo.mov" type="video/quicktime; codecs=hvc1" />
           <source src="assets/logos/festival_logo.webm" type="video/webm" />
         </video>
