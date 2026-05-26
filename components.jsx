@@ -129,15 +129,17 @@ const Hero = () =>
     <div className="shell hero-inner">
       <div className="hero-stage">
         <h1 className="sr-only">ABNØRMAAL Festival — House &amp; Techno Festival Apeldoorn 2026</h1>
-        <img
+        <video
+        autoPlay
+        muted
+        playsInline
+        poster="assets/logos/festival-logo-white.png"
         className="hero-festival-logo"
-        src="assets/logos/festival-logo-white.png"
-        alt="ABNØRMAAL Festival 2026 logo"
         aria-label="Abnormaal Festival"
-        role="img"
-        loading="eager"
-        decoding="async"
-        style={{ opacity: "1", margin: "3px", objectFit: "contain", width: "100%", maxWidth: "633px" }} />
+        style={{ opacity: "1", margin: "3px", objectFit: "contain", width: "100%", maxWidth: "633px", mixBlendMode: "screen" }}>
+          <source src="assets/logos/festival_logo.mov" type="video/quicktime; codecs=hvc1" />
+          <source src="assets/logos/festival_logo.webm" type="video/webm" />
+        </video>
         <div className="hero-actions">
           <a href="tickets.html" className="hero-btn hero-btn--primary" onClick={() => {
             if (typeof fbq !== 'undefined') {
