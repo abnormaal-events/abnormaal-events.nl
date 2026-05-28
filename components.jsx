@@ -58,6 +58,16 @@ const Nav = () => {
         <a href="about.html">about</a>
         <a href="lineup.html">line-up</a>
         <a href="index.html#archive">past events</a>
+        <a
+          href="#"
+          data-tally-open="QKkM2g"
+          data-tally-emoji-text="👋"
+          data-tally-emoji-animation="wave"
+          className="nav-ambassador"
+          onClick={(e) => e.preventDefault()}>
+          <span className="nav-ambassador-emoji" aria-hidden="true">👋</span>
+          <span>ambassador</span>
+        </a>
       </div>
       <a className="nav-cta-circle" href="tickets.html" aria-label="Get ticket">
         <span className="nav-cta-circle-text" aria-hidden="true">
@@ -706,4 +716,16 @@ const HeroMarquee = () => (
   </div>
 );
 
-Object.assign(window, { Nav, Hero, DateStrip, NextEvent, Marquee, Manifesto, About, TravelLocation, Archive, HeroMarquee, Footer });
+const AmbassadorFAB = () => (
+  <button
+    type="button"
+    data-tally-open="QKkM2g"
+    data-tally-emoji-text="👋"
+    data-tally-emoji-animation="wave"
+    className="ambassador-fab"
+    aria-label="Become an ambassador">
+    <span className="fab-emoji" aria-hidden="true">👋</span>
+  </button>
+);
+
+Object.assign(window, { Nav, Hero, DateStrip, NextEvent, Marquee, Manifesto, About, TravelLocation, Archive, HeroMarquee, Footer, AmbassadorFAB });

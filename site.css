@@ -3031,3 +3031,80 @@ body[data-squid="off"] .accent-squid { font-family: "Lenia Sans" !important; fon
   min-height: 56px;
   border-radius: 0;
 }
+
+/* ---------- Ambassador (Tally popup) ---------- */
+/* Desktop nav link */
+.nav-ambassador {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-ambassador .nav-ambassador-emoji {
+  display: inline-block;
+  font-size: 14px;
+  transform-origin: 70% 70%;
+  animation: wave-hand 2.5s ease-in-out infinite;
+}
+.nav-ambassador:hover { color: var(--accent); }
+
+/* Hide nav link on mobile */
+@media (max-width: 768px) {
+  .nav-ambassador { display: none !important; }
+}
+
+/* Floating action button — mobile, homepage only */
+.ambassador-fab {
+  display: none; /* default off; enabled below at <=768px */
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-red-ochre, #D62700);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 9990;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  animation: fab-pulse 2.5s ease-in-out infinite;
+  -webkit-tap-highlight-color: transparent;
+}
+.ambassador-fab:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+.ambassador-fab:active { transform: scale(0.96); }
+.ambassador-fab .fab-emoji {
+  display: inline-block;
+  font-size: 28px;
+  line-height: 1;
+  transform-origin: 70% 70%;
+  animation: wave-hand 2.5s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+  .ambassador-fab { display: inline-flex; }
+}
+
+@keyframes wave-hand {
+  0%, 60%, 100% { transform: rotate(0deg); }
+  10%, 30% { transform: rotate(-15deg); }
+  20% { transform: rotate(15deg); }
+  40%, 50% { transform: rotate(-8deg); }
+}
+@keyframes fab-pulse {
+  0%, 100% { box-shadow: 0 4px 12px rgba(214,39,0,0.3); }
+  50% { box-shadow: 0 4px 20px rgba(214,39,0,0.6); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-ambassador .nav-ambassador-emoji,
+  .ambassador-fab,
+  .ambassador-fab .fab-emoji {
+    animation: none !important;
+  }
+}
