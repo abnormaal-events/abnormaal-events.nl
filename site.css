@@ -1419,6 +1419,20 @@ body[data-nav-surface="light"] .nav:not(.is-scrolled) .nav-burger {
   .ticket-tier {
     padding: 14px;
     gap: 8px;
+    align-items: flex-start;
+  }
+  /* Badge above the title (out of absolute positioning) so it never overlaps */
+  .ticket-tier-badge {
+    position: static;
+    top: auto;
+    right: auto;
+    align-self: flex-start;
+    margin-bottom: 2px;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    padding: 4px 8px;
+    max-width: 100%;
+    white-space: normal;
   }
   .ticket-tier-name {
     font-size: 11px;
