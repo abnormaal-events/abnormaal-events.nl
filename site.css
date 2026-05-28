@@ -3052,42 +3052,70 @@ body[data-squid="off"] .accent-squid { font-family: "Lenia Sans" !important; fon
   .nav-ambassador { display: none !important; }
 }
 
-/* Floating action button — mobile, homepage only */
-.ambassador-fab {
-  display: none; /* default off; enabled below at <=768px */
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: none;
-  background: var(--color-red-ochre, #D62700);
-  color: #fff;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  z-index: 9990;
+/* Floating action button — REPLACED by ambassador strip (mobile). Kept hidden. */
+.ambassador-fab { display: none !important; }
+
+/* Mobile ambassador strip — homepage only, between hero marquee and manifesto */
+.ambassador-strip {
+  display: none; /* desktop: hidden; enabled below at <=768px */
+  background: var(--color-amethyst, #2A004E);
+  padding: 24px 20px;
+  text-align: center;
+}
+.ambassador-strip-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.ambassador-strip-eyebrow {
+  margin: 0;
+  font-family: "Lenia Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-red-ochre, #D62700);
+}
+.ambassador-strip-body {
+  margin: 0;
+  font-family: "Lenia Sans", sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgba(255, 247, 245, 0.72);
+}
+.ambassador-strip-btn {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0;
-  animation: fab-pulse 2.5s ease-in-out infinite;
+  gap: 8px;
+  margin-top: 4px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 4px;
+  background: var(--color-red-ochre, #D62700);
+  color: #fff7f5;
+  font-family: "Lenia Sans", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
-.ambassador-fab:focus-visible {
+.ambassador-strip-btn:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 3px;
 }
-.ambassador-fab:active { transform: scale(0.96); }
-.ambassador-fab .fab-emoji {
+.ambassador-strip-btn:active { transform: scale(0.98); }
+.ambassador-strip-btn .wave-emoji {
   display: inline-block;
-  font-size: 28px;
-  line-height: 1;
   transform-origin: 70% 70%;
   animation: wave-hand 2.5s ease-in-out infinite;
 }
 
 @media (max-width: 768px) {
-  .ambassador-fab { display: inline-flex; }
+  .ambassador-strip { display: block; }
 }
 
 @keyframes wave-hand {
@@ -3096,15 +3124,10 @@ body[data-squid="off"] .accent-squid { font-family: "Lenia Sans" !important; fon
   20% { transform: rotate(15deg); }
   40%, 50% { transform: rotate(-8deg); }
 }
-@keyframes fab-pulse {
-  0%, 100% { box-shadow: 0 4px 12px rgba(214,39,0,0.3); }
-  50% { box-shadow: 0 4px 20px rgba(214,39,0,0.6); }
-}
 
 @media (prefers-reduced-motion: reduce) {
   .nav-ambassador .nav-ambassador-emoji,
-  .ambassador-fab,
-  .ambassador-fab .fab-emoji {
+  .ambassador-strip-btn .wave-emoji {
     animation: none !important;
   }
 }

@@ -716,16 +716,21 @@ const HeroMarquee = () => (
   </div>
 );
 
-const AmbassadorFAB = () => (
-  <button
-    type="button"
-    data-tally-open="QKkM2g"
-    data-tally-emoji-text="👋"
-    data-tally-emoji-animation="wave"
-    className="ambassador-fab"
-    aria-label="Become an ambassador">
-    <span className="fab-emoji" aria-hidden="true">👋</span>
-  </button>
+const AmbassadorStrip = () => (
+  <section className="ambassador-strip" aria-label="Become an ambassador">
+    <div className="ambassador-strip-inner">
+      <p className="ambassador-strip-eyebrow">Want to be part of it?</p>
+      <p className="ambassador-strip-body">Become an ambassador and bring the crew.</p>
+      <button
+        type="button"
+        data-tally-open="QKkM2g"
+        data-tally-emoji-text="👋"
+        data-tally-emoji-animation="wave"
+        className="ambassador-strip-btn">
+        Become an ambassador <span className="wave-emoji" aria-hidden="true">👋</span>
+      </button>
+    </div>
+  </section>
 );
 
-Object.assign(window, { Nav, Hero, DateStrip, NextEvent, Marquee, Manifesto, About, TravelLocation, Archive, HeroMarquee, Footer, AmbassadorFAB });
+Object.assign(window, { Nav, Hero, DateStrip, NextEvent, Marquee, Manifesto, About, TravelLocation, Archive, HeroMarquee, Footer, AmbassadorStrip });
