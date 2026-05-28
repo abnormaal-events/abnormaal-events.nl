@@ -122,6 +122,15 @@ const MobileMenu = ({ isOpen, onClose }) => {
         {items.map((it) => (
           <a key={it.href} href={it.href} onClick={onClose}>{it.label}</a>
         ))}
+        <a
+          className="menu-ambassador"
+          href="#"
+          data-tally-open="QKkM2g"
+          data-tally-emoji-text="👋"
+          data-tally-emoji-animation="wave"
+          onClick={(e) => { e.preventDefault(); onClose(); }}>
+          ambassador
+        </a>
         <a className="mobile-menu-cta" href="tickets.html" onClick={onClose}>
           get tickets
           <svg width="18" height="18" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -237,21 +246,23 @@ const NextEvent = () => {
             <div className="ticket-tier-grid">
               {[
                 { tier: "Blind Tickets", price: "€44,95", status: "sold_out" },
-                { tier: "Early Bird",    price: "€49,95", status: "available" },
+                { tier: "Early Bird",    price: "€49,95", status: "almost" },
                 { tier: "Regular Bird",  price: "€54,95", status: "available" },
                 { tier: "Late Bird",     price: "€59,95", status: "available" },
               ].map((t) => {
                 const isSold = t.status === "sold_out";
+                const isAlmost = t.status === "almost";
                 return (
                   <a
                     key={t.tier}
                     href={isSold ? undefined : "tickets.html"}
                     className={"ticket-tier" + (isSold ? " ticket-tier--sold" : "")}
-                    data-status={isSold ? "sold-out" : "not-yet"}
+                    data-status={isSold ? "sold-out" : isAlmost ? "almost" : "not-yet"}
                     aria-disabled={isSold ? "true" : undefined}
                     tabIndex={isSold ? -1 : 0}
                   >
                     {isSold && <span className="ticket-tier-badge">Sold out</span>}
+                    {isAlmost && <span className="ticket-tier-badge ticket-tier-badge--almost">Almost sold out</span>}
                     <div className="ticket-tier-name">{t.tier}</div>
                     <div className="ticket-tier-price">{t.price}</div>
                   </a>

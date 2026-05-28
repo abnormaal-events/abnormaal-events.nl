@@ -1264,6 +1264,9 @@ body[data-nav-surface="light"] .nav:not(.is-scrolled) .nav-burger {
   z-index: 2;
   white-space: nowrap;
 }
+.ticket-tier-badge--almost {
+  letter-spacing: 0.12em;
+}
 
 .event-card-right {
   padding: 0;
@@ -3033,6 +3036,10 @@ body[data-squid="off"] .accent-squid { font-family: "Lenia Sans" !important; fon
 }
 
 /* ---------- Ambassador (Tally popup) ---------- */
+/* Mobile hamburger menu item — text only, no waving emoji */
+.mobile-menu-nav a.menu-ambassador {
+  color: var(--color-red-ochre, #D62700);
+}
 /* Desktop nav link */
 .nav-ambassador {
   display: inline-flex;
