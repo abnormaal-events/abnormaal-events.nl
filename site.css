@@ -1264,6 +1264,9 @@ body[data-nav-surface="light"] .nav:not(.is-scrolled) .nav-burger {
   z-index: 2;
   white-space: nowrap;
 }
+.ticket-tier-badge--almost {
+  letter-spacing: 0.12em;
+}
 
 .event-card-right {
   padding: 0;
@@ -1416,6 +1419,20 @@ body[data-nav-surface="light"] .nav:not(.is-scrolled) .nav-burger {
   .ticket-tier {
     padding: 14px;
     gap: 8px;
+    align-items: flex-start;
+  }
+  /* Badge above the title (out of absolute positioning) so it never overlaps */
+  .ticket-tier-badge {
+    position: static;
+    top: auto;
+    right: auto;
+    align-self: flex-start;
+    margin-bottom: 2px;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    padding: 4px 8px;
+    max-width: 100%;
+    white-space: normal;
   }
   .ticket-tier-name {
     font-size: 11px;
@@ -3030,4 +3047,108 @@ body[data-squid="off"] .accent-squid { font-family: "Lenia Sans" !important; fon
   text-transform: uppercase;
   min-height: 56px;
   border-radius: 0;
+}
+
+/* ---------- Ambassador (Tally popup) ---------- */
+/* Mobile hamburger menu item — text only, no waving emoji */
+.mobile-menu-nav a.menu-ambassador {
+  color: var(--color-red-ochre, #D62700);
+}
+/* Desktop nav link */
+.nav-ambassador {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-ambassador .nav-ambassador-emoji {
+  display: inline-block;
+  font-size: 14px;
+  transform-origin: 70% 70%;
+  animation: wave-hand 2.5s ease-in-out infinite;
+}
+.nav-ambassador:hover { color: var(--accent); }
+
+/* Hide nav link on mobile */
+@media (max-width: 768px) {
+  .nav-ambassador { display: none !important; }
+}
+
+/* Floating action button — REPLACED by ambassador strip (mobile). Kept hidden. */
+.ambassador-fab { display: none !important; }
+
+/* Mobile ambassador strip — homepage only, between hero marquee and manifesto */
+.ambassador-strip {
+  display: none; /* desktop: hidden; enabled below at <=768px */
+  background: var(--color-amethyst, #2A004E);
+  padding: 24px 20px;
+  text-align: center;
+}
+.ambassador-strip-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.ambassador-strip-eyebrow {
+  margin: 0;
+  font-family: "Lenia Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-red-ochre, #D62700);
+}
+.ambassador-strip-body {
+  margin: 0;
+  font-family: "Lenia Sans", sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgba(255, 247, 245, 0.72);
+}
+.ambassador-strip-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 4px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 4px;
+  background: var(--color-red-ochre, #D62700);
+  color: #fff7f5;
+  font-family: "Lenia Sans", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.ambassador-strip-btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+.ambassador-strip-btn:active { transform: scale(0.98); }
+.ambassador-strip-btn .wave-emoji {
+  display: inline-block;
+  transform-origin: 70% 70%;
+  animation: wave-hand 2.5s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+  .ambassador-strip { display: block; }
+}
+
+@keyframes wave-hand {
+  0%, 60%, 100% { transform: rotate(0deg); }
+  10%, 30% { transform: rotate(-15deg); }
+  20% { transform: rotate(15deg); }
+  40%, 50% { transform: rotate(-8deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-ambassador .nav-ambassador-emoji,
+  .ambassador-strip-btn .wave-emoji {
+    animation: none !important;
+  }
 }
