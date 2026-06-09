@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ABNØRMAAL — Line-up reveal email preview</title>
+<style>
+  :root {
+    --ink: #26094B;
+    --ink-deep: #1a0635;
+    --paper: #f5f0e8;
+    --accent: #d62700;
+    --on-dark: #ffffff;
+  }
+  html, body { margin: 0; padding: 0; background: #ffffff; }
+  body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color: #fff;
+    -webkit-text-size-adjust: 100%;
+  }
+  .email-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--ink);
+  }
+  .squid { font-family: Impact, "Arial Black", "SquidBoy", sans-serif; font-weight: 900; }
+
+  /* 1. Header */
+  .em-header {
+    background: var(--ink);
+    text-align: center;
+    padding: 22px 24px 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .em-header img {
+    height: 22px; width: auto; display: inline-block; vertical-align: middle;
+  }
+
+  /* 2. Hero with photo + festival logo */
+  .em-hero {
+    position: relative;
+    background-color: var(--ink-deep);
+    background-image:
+      linear-gradient(180deg, rgba(38,9,75,0.6) 0%, rgba(26,6,53,0.92) 80%),
+      url("assets/backgrounds/bg-social-7.png");
+    background-size: cover;
+    background-position: center;
+    padding: 72px 28px 64px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .em-hero-grain {
+    position: absolute; inset: 0;
+    background-image: url("assets/backgrounds/bg-social-1.png");
+    background-size: cover;
+    background-position: center;
+    opacity: 0.18;
+    mix-blend-mode: screen;
+    pointer-events: none;
+  }
+  .em-hero-inner { position: relative; z-index: 1; }
+  .em-hero-eyebrow {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 26px;
+  }
+  .em-hero-festival-logo {
+    display: block;
+    margin: 0 auto 24px;
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+  }
+  .em-hero-tagline {
+    font-family: Impact, "Arial Black", sans-serif;
+    font-size: 56px;
+    line-height: 0.92;
+    color: #fff;
+    margin: 0 0 22px;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+  }
+  .em-hero-sub {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.28em;
+    color: rgba(255,255,255,0.88);
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .em-hero-sub b { color: var(--accent); font-weight: 700; }
+
+  /* Pulse divider (static) */
+  .em-divider {
+    position: relative;
+    height: 3px;
+    background-color: rgba(255,255,255,0.55);
+    overflow: hidden;
+  }
+  .em-divider::after {
+    content: "";
+    position: absolute;
+    top: -4px;
+    bottom: -4px;
+    left: 25%;
+    width: 30%;
+    background: linear-gradient(
+      90deg,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.7) 35%,
+      rgba(255,255,255,1) 50%,
+      rgba(255,255,255,0.7) 65%,
+      rgba(255,255,255,0) 100%
+    );
+    box-shadow:
+      0 0 12px rgba(255,255,255,0.9),
+      0 0 28px rgba(255,255,255,0.55);
+  }
+
+  /* 3. Magneten — top 5 with portrait thumbs */
+  .em-magnets {
+    background: var(--ink);
+    padding: 48px 28px 36px;
+    position: relative;
+  }
+  .em-magnets-grain {
+    position: absolute; inset: 0;
+    background-image: url("assets/backgrounds/bg-social-7.png");
+    background-size: cover;
+    opacity: 0.06;
+    mix-blend-mode: screen;
+    pointer-events: none;
+  }
+  .em-magnets-inner { position: relative; z-index: 1; }
+  .em-magnets-eyebrow {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .em-name-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 14px 4px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .em-name-row:last-of-type { border-bottom: none; }
+  .em-name-thumb {
+    flex: 0 0 auto;
+    width: 64px;
+    height: 64px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    background-color: rgba(255,255,255,0.05);
+  }
+  .em-name-text { flex: 1 1 auto; min-width: 0; }
+  .em-name-stage-row {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 4px;
+    height: 14px;
+  }
+  .em-name-stage-row img {
+    height: 12px; width: auto; display: block; opacity: 0.85;
+  }
+  .em-name-stage-row .viper-tag { height: 22px; margin: -5px 0; }
+  .em-name-stage-row .em-stage-label {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+  }
+  .em-role {
+    display: block;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+    text-transform: lowercase;
+    margin-bottom: 2px;
+  }
+  .em-name {
+    font-family: Impact, "Arial Black", sans-serif;
+    font-size: 36px;
+    line-height: 1;
+    color: #fff;
+    letter-spacing: -0.005em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .em-more {
+    text-align: center;
+    font-family: Impact, "Arial Black", sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(214,39,0,0.4);
+  }
+
+  /* 4. Stage indicator strip — three-column grid for clean alignment */
+  .em-stages-strip {
+    background: var(--ink-deep);
+    border-top: 1px solid rgba(214,39,0,0.45);
+    border-bottom: 1px solid rgba(214,39,0,0.45);
+    padding: 28px 20px 28px;
+    text-align: center;
+  }
+  .em-stages-eyebrow {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .em-stages-grid {
+    display: inline-grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: start;
+    gap: 0 28px;
+    color: #fff;
+  }
+  .em-stage-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    min-width: 160px;
+  }
+  .em-stage-logo-slot {
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .em-stage-logo-slot img { display: block; }
+  .em-stage-logo-slot img.mr-boost { height: 32px; width: auto; }
+  .em-stage-logo-slot img.viper    { height: 56px; width: auto; }
+  .em-stage-name {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 1.1;
+  }
+  .em-stages-x-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+  }
+  .em-stages-x {
+    font-family: Impact, "Arial Black", sans-serif;
+    font-size: 24px;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  /* 5. Secondary CTA */
+  .em-cta-secondary-wrap {
+    text-align: center;
+    padding: 36px 24px 48px;
+    background: var(--ink);
+  }
+  .em-cta-secondary {
+    display: inline-block;
+    border: 1.5px solid #fff;
+    color: #fff;
+    text-decoration: none;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 14px 30px;
+  }
+
+  /* 6. Early bird block — primary conversion */
+  .em-earlybird {
+    background: var(--paper);
+    color: var(--ink);
+    padding: 64px 28px 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .em-earlybird-mark {
+    width: 56px; height: 56px; margin: 0 auto 18px;
+    opacity: 0.95;
+  }
+  .em-earlybird-eyebrow {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .em-earlybird-price {
+    font-family: Impact, "Arial Black", sans-serif;
+    font-size: 96px;
+    line-height: 0.9;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .em-earlybird-tier-was {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 11px;
+    color: rgba(38,9,75,0.55);
+    margin-top: 14px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .em-earlybird-tier-was s { margin-right: 8px; }
+  .em-earlybird-copy {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 22px auto 32px;
+    max-width: 360px;
+  }
+  .em-earlybird-copy b { color: var(--accent); font-weight: 700; }
+  .em-cta-primary {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff !important;
+    text-decoration: none;
+    font-family: Impact, "Arial Black", sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 22px 48px;
+    border: 2px solid var(--accent);
+  }
+  .em-earlybird-fine {
+    margin-top: 18px;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: rgba(38,9,75,0.55);
+    text-transform: uppercase;
+  }
+
+  /* 7. Footer */
+  .em-footer {
+    background: var(--ink-deep);
+    color: rgba(255,255,255,0.65);
+    padding: 40px 28px 32px;
+    text-align: center;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 12px;
+  }
+  .em-footer img.em-footer-wordmark {
+    height: 18px; width: auto; display: inline-block; margin-bottom: 18px;
+  }
+  .em-footer-meta {
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 11px;
+    margin-bottom: 22px;
+  }
+  .em-footer-socials { margin-bottom: 22px; }
+  .em-footer-socials a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 8px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    padding-bottom: 2px;
+  }
+  .em-footer-unsub {
+    color: rgba(255,255,255,0.42);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    margin-top: 12px;
+  }
+  .em-footer-unsub a { color: rgba(255,255,255,0.6); text-decoration: underline; }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    .em-hero { padding: 56px 20px 48px; }
+    .em-hero-festival-logo { max-width: 280px; }
+    .em-hero-tagline { font-size: 40px; }
+    .em-hero-sub { font-size: 11px; letter-spacing: 0.22em; }
+    .em-magnets { padding: 36px 18px 28px; }
+    .em-name { font-size: 28px; }
+    .em-name-thumb { width: 56px; height: 56px; }
+    .em-more { font-size: 18px; }
+    .em-stages-strip { padding: 22px 16px 22px; }
+    .em-stages-grid { gap: 0 18px; }
+    .em-stage-col { min-width: 0; gap: 10px; }
+    .em-stage-logo-slot { height: 44px; }
+    .em-stage-logo-slot img.mr-boost { height: 26px; }
+    .em-stage-logo-slot img.viper { height: 44px; }
+    .em-stages-x-col { height: 44px; }
+    .em-stage-name { font-size: 10px; letter-spacing: 0.18em; }
+    .em-stages-x { font-size: 20px; }
+    .em-cta-secondary-wrap { padding: 28px 20px 36px; }
+    .em-earlybird { padding: 48px 20px; }
+    .em-earlybird-price { font-size: 72px; }
+    .em-cta-primary { font-size: 17px; padding: 18px 34px; }
+    .em-footer { padding: 30px 20px; }
+  }
+</style>
+</head>
+<body>
+  <div class="email-wrapper" role="article" aria-label="ABNØRMAAL line-up email">
+
+    <!-- 1. Header -->
+    <div class="em-header">
+      <img src="assets/logos/logo-horizontal-texture-white.png" alt="ABNØRMAAL">
+    </div>
+
+    <!-- 2. Hero -->
+    <div class="em-hero">
+      <div class="em-hero-grain"></div>
+      <div class="em-hero-inner">
+        <div class="em-hero-eyebrow">LINE-UP 2026 · REVEALED</div>
+        <img class="em-hero-festival-logo" src="assets/logos/festival-logo-white.png" alt="ABNØRMAAL Festival 2026">
+        <h1 class="em-hero-tagline">It's time.</h1>
+        <p class="em-hero-sub"><b>5 SEP</b> · APELDOORN · OUTDOOR · TWO STAGES</p>
+      </div>
+    </div>
+
+    <div class="em-divider" aria-hidden="true"></div>
+
+    <!-- 4. Stage indicator strip — between divider and names -->
+    <div class="em-stages-strip">
+      <div class="em-stages-eyebrow">Two stages · one day</div>
+      <div class="em-stages-grid">
+        <div class="em-stage-col">
+          <div class="em-stage-logo-slot">
+            <img class="mr-boost" src="assets/logos/mr-boost-white.svg" alt="Mr. Boost Arena">
+          </div>
+          <span class="em-stage-name">Mr. Boost Arena</span>
+        </div>
+        <div class="em-stages-x-col">
+          <span class="em-stages-x" aria-hidden="true">×</span>
+        </div>
+        <div class="em-stage-col">
+          <div class="em-stage-logo-slot">
+            <img class="viper" src="assets/logos/viper-white.webp" alt="Viper Hard Area">
+          </div>
+          <span class="em-stage-name">Viper Hard Area</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Magneten -->
+    <div class="em-magnets">
+      <div class="em-magnets-grain"></div>
+      <div class="em-magnets-inner">
+        <div class="em-magnets-eyebrow">Starring</div>
+
+        <div class="em-name-row">
+          <div class="em-name-thumb" style="background-image: url('assets/lineup/miss-k8.png');"></div>
+          <div class="em-name-text">
+            <div class="em-name-stage-row">
+              <img class="viper-tag" src="assets/logos/viper-white.webp" alt="">
+              <span class="em-stage-label">Viper Hard Area</span>
+            </div>
+            <span class="em-role">(hard closing)</span>
+            <h2 class="em-name">MISS K8</h2>
+          </div>
+        </div>
+
+        <div class="em-name-row">
+          <div class="em-name-thumb" style="background-image: url('assets/lineup/michel-de-hey.png');"></div>
+          <div class="em-name-text">
+            <div class="em-name-stage-row">
+              <img src="assets/logos/mr-boost-white.svg" alt="">
+              <span class="em-stage-label">Mr. Boost Arena</span>
+            </div>
+            <h2 class="em-name">MICHEL DE HEY</h2>
+          </div>
+        </div>
+
+        <div class="em-name-row">
+          <div class="em-name-thumb" style="background-image: url('assets/lineup/dkoxy.png');"></div>
+          <div class="em-name-text">
+            <div class="em-name-stage-row">
+              <img class="viper-tag" src="assets/logos/viper-white.webp" alt="">
+              <span class="em-stage-label">Viper Hard Area</span>
+            </div>
+            <h2 class="em-name">D|K|OXY</h2>
+          </div>
+        </div>
+
+        <div class="em-name-row">
+          <div class="em-name-thumb" style="background-image: url('assets/lineup/d-stone.png');"></div>
+          <div class="em-name-text">
+            <div class="em-name-stage-row">
+              <img src="assets/logos/mr-boost-white.svg" alt="">
+              <span class="em-stage-label">Mr. Boost Arena</span>
+            </div>
+            <h2 class="em-name">D STONE</h2>
+          </div>
+        </div>
+
+        <div class="em-name-row">
+          <div class="em-name-thumb" style="background-image: url('assets/lineup/moody-mehran.png');"></div>
+          <div class="em-name-text">
+            <div class="em-name-stage-row">
+              <img src="assets/logos/mr-boost-white.svg" alt="">
+              <span class="em-stage-label">Mr. Boost Arena</span>
+            </div>
+            <h2 class="em-name">MOODY MEHRAN</h2>
+          </div>
+        </div>
+
+        <div class="em-more">+ 9 MORE</div>
+      </div>
+    </div>
+
+    <!-- 5. Secondary CTA -->
+    <div class="em-cta-secondary-wrap">
+      <a class="em-cta-secondary" href="https://abnormaal-events.nl/lineup">
+        See full line-up →
+      </a>
+    </div>
+
+    <div class="em-divider" aria-hidden="true"></div>
+
+    <!-- 6. Early bird -->
+    <div class="em-earlybird">
+      <img class="em-earlybird-mark" src="assets/logos/logo-square-texture-purple.png" alt="">
+      <div class="em-earlybird-eyebrow">Early bird · live now</div>
+      <h2 class="em-earlybird-price">€49,95</h2>
+      <div class="em-earlybird-tier-was"><s>€44,95 Blind</s> Sold out</div>
+      <p class="em-earlybird-copy"><b>Blind tickets sold out.</b><br>Don't sleep on early bird — €54,95 next.</p>
+      <a class="em-cta-primary" href="https://celebratix.nl/abnormaal-festival">
+        Secure your ticket →
+      </a>
+      <div class="em-earlybird-fine">Limited · pricing rises after early bird</div>
+    </div>
+
+    <!-- 7. Footer -->
+    <div class="em-footer">
+      <img class="em-footer-wordmark" src="assets/logos/logo-horizontal-texture-white.png" alt="ABNØRMAAL">
+      <div class="em-footer-meta">Dance-event organisation · Netherlands</div>
+      <div class="em-footer-socials">
+        <a href="https://instagram.com/abnormaal.events">Instagram</a>
+        <a href="https://tiktok.com/@abnormaal.events">TikTok</a>
+        <a href="https://youtube.com/@abnormaalevents">YouTube</a>
+      </div>
+      <div class="em-footer-unsub">
+        You receive this because you joined the ABNØRMAAL list. <a href="#">Unsubscribe</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -219,8 +219,8 @@ const NextEvent = () => {
               <div className="lineup-label">Line-up · house & techno</div>
               <div className="lineup-names">
                 {[
-                  "BLNK", "BURNR", "CLAESSENS", "CONCEPT", "D|K|OXY", "D-STONE",
-                  "FREDDI B2B KARA.OKAY", "IOSIO", "JO3Y3T", "MICHEL DE HEY",
+                  "BLNK", "BURNR", "CLAESSENS", "CONCEPT", "D|K|OXY", "D STONE",
+                  "FREDDI B2B KARA OKAY", "IOSIO", "JO3Y3T", "MICHEL DE HEY",
                   "MISS K8", "MOODY MEHRAN", "SASHE", "TITI"
                 ].map((name, i, arr) => (
                   <span key={name} className="lineup-item">
@@ -665,8 +665,8 @@ const Manifesto = () => {
 };
 
 const HERO_HOUSE_DJS = [
-  "MICHEL DE HEY", "D-STONE", "MOODY MEHRAN", "BURNR",
-  "FREDDI B2B KARA.OKAY", "IOSIO", "CONCEPT",
+  "MICHEL DE HEY", "D STONE", "MOODY MEHRAN", "BURNR",
+  "FREDDI B2B KARA OKAY", "IOSIO", "CONCEPT",
 ];
 const HERO_TECHNO_DJS = [
   "MISS K8", "CLAESSENS", "D|K|OXY", "TITI", "BLNK", "JO3Y3T", "SASHE",
