@@ -142,7 +142,31 @@ const MobileMenu = ({ isOpen, onClose }) => {
   );
 };
 
-const Hero = () =>
+const Hero = () => {
+  React.useEffect(() => {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    gsap.registerPlugin(ScrollTrigger);
+    const bg = document.querySelector('.hero-bg');
+    const stage = document.querySelector('.hero-stage');
+    const tweens = [];
+    if (bg) {
+      tweens.push(gsap.to(bg, {
+        yPercent: 16, scale: 1.07, ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true },
+      }));
+    }
+    if (stage) {
+      tweens.push(gsap.to(stage, {
+        yPercent: -10, opacity: 0.3, ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true },
+      }));
+    }
+    return () => {
+      tweens.forEach((t) => { if (t.scrollTrigger) t.scrollTrigger.kill(); t.kill(); });
+    };
+  }, []);
+  return (
 <section className="hero" id="top">
     <div className="hero-bg"></div>
     <div className="shell hero-inner">
@@ -155,7 +179,7 @@ const Hero = () =>
         poster="assets/logos/festival-logo-white.png"
         className="hero-festival-logo"
         aria-label="Abnormaal Festival"
-        style={{ opacity: "1", margin: "3px", objectFit: "contain", width: "100%", maxWidth: "633px", mixBlendMode: "screen" }}>
+        style={{ opacity: "1", margin: "3px", objectFit: "contain", width: "100%", mixBlendMode: "screen" }}>
           <source src="assets/logos/festival_logo.mov" type="video/quicktime; codecs=hvc1" />
           <source src="assets/logos/festival_logo.webm" type="video/webm" />
         </video>
@@ -192,7 +216,11 @@ const Hero = () =>
     </div>
     <HeroMarquee />
     <div className="hero-chain"></div>
-  </section>;const DateStrip = () => <div className="date-strip" style={{ backgroundColor: "rgb(214, 0, 0)" }}>
+  </section>
+  );
+};
+
+const DateStrip = () => <div className="date-strip" style={{ backgroundColor: "rgb(214, 0, 0)" }}>
     <div className="date-strip-inner">
       <span>SAT, SEP 5TH, 2026</span>
       <span className="squid">Natuurstrook A1 · Apeldoorn</span>
@@ -400,7 +428,7 @@ const TravelLocation = () => {
         <div className="travel-frame">
           <img
             className="travel-drone"
-            src="assets/photos/location-drone.jpg"
+            src="assets/photos/location-drone.png"
             alt="Festival locatie Natuurstrook A1 Apeldoorn vanuit de lucht — outdoor house en techno festival"
             loading="lazy" />
         </div>

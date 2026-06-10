@@ -1,0 +1,528 @@
+/* ============================================================
+   ABNØRMAAL — Redesign layer v1 (hero + lineup showcase)
+   Loaded AFTER site.css / lineup.css. Pure visual overrides:
+   no content, structure or integration changes.
+   ============================================================ */
+
+/* ---------- 1. Nav ticket CTA: red at every scroll point ---------- */
+.nav-cta-circle,
+.nav:not(.is-scrolled) .nav-cta-circle {
+  background: var(--accent);
+}
+.nav-cta-circle:hover,
+.nav:not(.is-scrolled) .nav-cta-circle:hover {
+  background: var(--color-spicy-orange);
+  transform: scale(1.08);
+}
+.nav-cta-circle-inner { color: var(--accent); }
+.nav-cta-circle:hover .nav-cta-circle-inner { color: var(--color-spicy-orange); }
+
+/* ---------- 2. Hero: depth, halftone field, big type ---------- */
+.hero-bg {
+  opacity: 0.6;
+  will-change: transform;
+}
+/* red halftone dot-field, masked to bottom corners — brand signature */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(214, 39, 0, 0.85) 1.2px, transparent 1.8px);
+  background-size: 9px 9px;
+  -webkit-mask-image:
+    radial-gradient(70% 55% at 8% 108%, black 0%, transparent 62%),
+    radial-gradient(60% 45% at 98% -6%, black 0%, transparent 60%);
+  mask-image:
+    radial-gradient(70% 55% at 8% 108%, black 0%, transparent 62%),
+    radial-gradient(60% 45% at 98% -6%, black 0%, transparent 60%);
+  -webkit-mask-composite: source-over;
+  mask-composite: add;
+  mix-blend-mode: screen;
+  opacity: 0.5;
+}
+/* stronger film grain */
+.hero::after { opacity: 0.14; }
+
+/* hero sizing: logo sharp at ~60% viewport max, marquee above the fold */
+.hero { min-height: 100svh; }
+.hero-festival-logo { max-width: min(620px, 58vw); }
+.hero-stage { gap: 28px; padding: 20px 0; }
+.hero-inner { padding: 96px 0 32px; }
+@media (max-width: 768px) {
+  .hero-festival-logo { max-width: 86vw; }
+  .hero-stage { gap: 22px; }
+  .hero-inner { padding: 84px 0 24px; }
+  /* CTAs: stacked, centered, equal width, clear of the screen edges.
+     !important needed: site.css mobile pass forces row + auto widths with !important */
+  .hero-actions {
+    flex-direction: column !important;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    padding: 0 20px;
+  }
+  .hero-actions .hero-btn {
+    width: 80% !important;
+    max-width: 320px;
+    flex: 0 0 auto;
+    justify-content: center;
+  }
+  .hero-actions .hero-btn .hero-btn-inner {
+    width: 100%;
+    justify-content: center;
+    padding: 16px 20px !important;
+  }
+}
+/* short viewports (small laptops): compress so >=1 marquee row stays above the fold */
+@media (min-width: 769px) and (max-height: 760px) {
+  .hero-festival-logo { max-width: min(480px, 48vw); }
+  .hero-inner { padding: 78px 0 20px; }
+  .hero-stage { gap: 16px; padding: 8px 0; }
+  .hero-info-line { font-size: clamp(17px, 1.9vw, 24px); margin-top: 14px; }
+  .hero-btn-inner { padding: 13px 24px; }
+  .hero-marquee { height: 44px; }
+  .hero-dj-name { font-size: 21px; }
+  .hero-dj-x { font-size: 15px; }
+}
+
+/* hero info line — display voice, but in proportion */
+.hero-info-line {
+  font-family: "SquidBoy", "Lenia Sans", sans-serif;
+  font-weight: 300;
+  font-size: clamp(19px, 2.3vw, 34px);
+  letter-spacing: 0.05em;
+  line-height: 1;
+  gap: clamp(12px, 1.6vw, 24px);
+  margin-top: 28px;
+}
+.hero-info-line .hero-info-dot {
+  color: var(--accent);
+  font-family: "SquidBoy", sans-serif;
+}
+.hero-info-line > span { white-space: nowrap; }
+
+/* hero CTAs — red slab w/ hard sticker shadow */
+.hero-actions { gap: 20px; }
+.hero-btn {
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  border-width: 2px;
+}
+.hero-btn-inner { padding: 17px 30px; gap: 12px; }
+.hero-btn--primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  box-shadow: 6px 6px 0 0 rgba(10, 10, 10, 0.85);
+  transition: transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.hero-btn--primary:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 9px 9px 0 0 rgba(10, 10, 10, 0.85);
+  border-color: var(--accent);
+}
+.hero-btn--primary .hero-btn-glow { display: none; }
+.hero-btn--ghost {
+  border-color: rgba(255, 247, 245, 0.85);
+}
+
+/* dual DJ marquees — from footnote to billboard */
+.hero-marquees {
+  border-top: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+}
+.hero-marquee {
+  height: clamp(48px, 4.8vw, 68px);
+  background: rgba(8, 0, 18, 0.4);
+}
+.hero-marquee--house {
+  border-bottom: 2px solid color-mix(in oklab, var(--accent) 55%, transparent);
+}
+.hero-marquee-track { gap: clamp(22px, 2.4vw, 40px); }
+.hero-dj-name {
+  font-size: clamp(22px, 2.3vw, 36px);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+.hero-dj-x { font-size: clamp(16px, 1.7vw, 26px); }
+.hero-marquee-logo img { height: 30px; }
+.hero-marquee-logo img.viper-marquee-logo { height: 52px; max-width: 66px; }
+@media (max-width: 900px) {
+  .hero-marquee-logo img { height: 26px; }
+  .hero-marquee-logo img.viper-marquee-logo { height: 48px; max-width: 60px; }
+}
+
+/* entrance choreography — end state is the base style */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-festival-logo { animation: hero-rise 850ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+  .hero-actions      { animation: hero-rise 850ms cubic-bezier(0.2, 0.8, 0.2, 1) 140ms both; }
+  .hero-info-line    { animation: hero-rise 850ms cubic-bezier(0.2, 0.8, 0.2, 1) 260ms both; }
+  .hero-marquees     { animation: hero-fade 1100ms ease 420ms both; }
+}
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes hero-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ---------- 3. Line-up page: opening statement ---------- */
+.lineup-opening--compact { padding: 160px 24px 64px; }
+.lineup-opening--compact .lineup-opening-title {
+  font-size: clamp(40px, 7.5vw, 108px);
+  font-weight: 300;
+  line-height: 0.98;
+  max-width: 1150px;
+  letter-spacing: -0.01em;
+}
+.lineup-opening--compact .lineup-opening-eyebrow {
+  font-size: 13px;
+  letter-spacing: 0.3em;
+}
+@media (max-width: 900px) {
+  .lineup-opening--compact { padding: 112px 20px 44px; }
+  .lineup-opening--compact .lineup-opening-title { font-size: clamp(36px, 10vw, 44px); }
+}
+
+/* filter buttons: hard edges on desktop */
+@media (min-width: 769px) {
+  .lineup-filter-btn { border-radius: 0; border-width: 2px; }
+}
+
+/* ---------- 4. Artist grid: the showpiece ---------- */
+.artist-grid { gap: 20px; }
+/* headliner card (first in the bill) gets poster treatment */
+.artist-grid .artist-card:first-child {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.artist-card-equal {
+  border-radius: 0;
+  border: 1px solid rgba(255, 247, 245, 0.12);
+  transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.artist-card-equal:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 7px 7px 0 0 var(--accent);
+}
+
+/* image: slow zoom + red duotone wash on hover */
+.artist-card-image {
+  transition: transform 650ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+.artist-card-equal:hover .artist-card-image { transform: scale(1.06); }
+.artist-card-image-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(214, 39, 0, 0) 25%, rgba(214, 39, 0, 0.6) 100%);
+  mix-blend-mode: multiply;
+  opacity: 0;
+  transition: opacity 350ms ease;
+  pointer-events: none;
+}
+.artist-card-equal:hover .artist-card-image-wrapper::after { opacity: 1; }
+
+/* stage tag — pure CSS, from the data-stage attribute */
+.artist-card-equal::after {
+  content: attr(data-stage);
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 3;
+  font-family: "Lenia Sans", sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(8, 0, 18, 0.6);
+  border: 1px solid rgba(255, 247, 245, 0.3);
+  padding: 6px 9px;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 250ms ease, transform 250ms ease;
+  pointer-events: none;
+}
+.artist-card-equal:hover::after,
+.artist-card-equal:focus-within::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* names: poster type, bottom-left, allowed to wrap */
+.artist-card-overlay { height: 68%; }
+.artist-card-name-on-image {
+  left: 18px;
+  right: 18px;
+  bottom: 16px;
+  text-align: left;
+  white-space: normal;
+  overflow: visible;
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  font-weight: 300;
+  transition: color 200ms ease, transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.artist-card-equal:hover .artist-card-name-on-image { transform: translateY(-4px); }
+.artist-card-name-on-image.artist-name--regular { font-size: clamp(32px, 3.1vw, 46px); }
+.artist-card-name-on-image.artist-name--medium  { font-size: clamp(24px, 2.4vw, 34px); }
+.artist-card-name-on-image.artist-name--small   { font-size: clamp(19px, 1.9vw, 27px); }
+.artist-grid .artist-card:first-child .artist-card-name-on-image {
+  font-size: clamp(52px, 6.2vw, 100px);
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+}
+.artist-card-name-on-image .artist-role-inline {
+  text-align: left;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  margin-bottom: 6px;
+}
+.artist-grid .artist-card:first-child .artist-role-inline { font-size: 16px; }
+
+@media (max-width: 768px) {
+  .artist-grid { gap: 12px; }
+  .artist-grid .artist-card:first-child { grid-column: span 2; grid-row: auto; }
+  .artist-card-name-on-image { left: 12px; right: 12px; bottom: 12px; }
+  .artist-card-name-on-image.artist-name--regular { font-size: 27px; }
+  .artist-card-name-on-image.artist-name--medium  { font-size: 21px; }
+  .artist-card-name-on-image.artist-name--small   { font-size: 16px; }
+  .artist-grid .artist-card:first-child .artist-card-name-on-image { font-size: clamp(44px, 12vw, 64px); bottom: 16px; left: 16px; right: 16px; }
+  /* stage tag always visible on touch — no hover there */
+  .artist-card-equal::after { opacity: 1; transform: none; font-size: 9px; padding: 5px 7px; }
+}
+
+/* ---------- 5. More-to-be-announced + CTA ---------- */
+.lineup-more-title {
+  font-size: clamp(40px, 6vw, 84px);
+  font-weight: 300;
+}
+.lineup-more-cta {
+  border-radius: 0;
+  box-shadow: 6px 6px 0 0 rgba(10, 10, 10, 0.8);
+  transition: transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.lineup-more-cta:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 9px 9px 0 0 rgba(10, 10, 10, 0.8);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg { transform: none !important; }
+  .artist-card-equal,
+  .artist-card-image,
+  .artist-card-name-on-image { transition: none; }
+}
+
+/* ============================================================
+   Redesign layer v2 — rest of the homepage + shared elements
+   ============================================================ */
+
+/* ---------- 6. Section headers: annotations with more voice ---------- */
+.section-label { font-size: 12px; letter-spacing: 0.26em; }
+.section-label .num { font-size: 22px; }
+.section-title {
+  font-family: "SquidBoy", "Lenia Sans", sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+}
+
+/* ---------- 7. Manifesto: from paragraph to statement ---------- */
+.manifesto { position: relative; overflow: hidden; }
+.manifesto::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(42, 0, 78, 0.5) 1.1px, transparent 1.6px);
+  background-size: 10px 10px;
+  -webkit-mask-image: radial-gradient(55% 70% at -4% 50%, black 0%, transparent 60%);
+  mask-image: radial-gradient(55% 70% at -4% 50%, black 0%, transparent 60%);
+  opacity: 0.35;
+}
+.manifesto-inner { max-width: 880px; position: relative; }
+.manifesto-eyebrow { color: var(--accent); letter-spacing: 0.26em; }
+.manifesto-body {
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.45;
+}
+.manifesto-close {
+  font-size: clamp(34px, 4.6vw, 64px);
+  line-height: 1.02;
+  letter-spacing: 0;
+}
+@media (max-width: 720px) {
+  .manifesto-close { white-space: normal; font-size: 32px; }
+}
+
+/* ---------- 8. Featured event card: poster object ---------- */
+.event-card {
+  box-shadow: 10px 10px 0 0 var(--ink);
+}
+.event-lineup .lineup-names { font-size: clamp(34px, 2.6vw, 44px); }
+.event-lineup .lineup-sep { font-size: 26px; }
+/* mobile: multiple names per line, nothing clipped, card stays compact */
+@media (max-width: 900px) {
+  .event-lineup .lineup-names { font-size: 20px; gap: 5px 10px; }
+  .event-lineup .lineup-item { gap: 8px; }
+  .event-lineup .lineup-sep { font-size: 15px; }
+}
+.ticket-tier {
+  border-radius: 0;
+  transition: background 180ms, border-color 180ms,
+              transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.ticket-tier-price { color: rgba(255, 247, 245, 0.85); }
+.ticket-tier:hover {
+  background: rgba(255, 247, 245, 0.1);
+  border-color: var(--accent);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 0 var(--accent);
+}
+.ticket-tier--sold:hover { transform: none; box-shadow: none; }
+/* mid-width panels (769–1100px): badge in-flow above the title, same as mobile,
+   so ALMOST SOLD OUT never overlaps the tier name */
+@media (min-width: 769px) and (max-width: 1100px) {
+  .ticket-tier-badge {
+    position: static;
+    align-self: flex-start;
+    margin-bottom: 2px;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    padding: 4px 8px;
+    white-space: normal;
+  }
+}
+.event-cta--tickets {
+  background: var(--accent);
+  color: #fff;
+  font-size: 16px;
+  letter-spacing: 0.2em;
+}
+.event-cta--tickets:hover { background: var(--color-spicy-orange); color: #fff; }
+.event-cta .arrow { font-size: 28px; }
+@media (max-width: 768px) {
+  .event-card { box-shadow: 6px 6px 0 0 var(--ink); }
+}
+
+/* ---------- 9. Red marquee strip: tilted billboard ---------- */
+/* page-edge clip so the tilted strip never causes horizontal scroll */
+html, body { overflow-x: clip; }
+.marquee {
+  transform: rotate(-1.4deg) scaleX(1.04);
+  transform-origin: center;
+  position: relative;
+  z-index: 2;
+  margin: 28px 0;
+  border-top: 3px solid var(--ink);
+  border-bottom: 3px solid var(--ink);
+  padding: 26px 0;
+}
+.marquee-item,
+.marquee-item .marquee-text {
+  font-size: clamp(38px, 4vw, 58px);
+  font-weight: 300;
+}
+.marquee-item .star { width: 32px; height: 32px; }
+/* mobile: smaller banner type + no dead space around the tilted strip */
+@media (max-width: 768px) {
+  .marquee { margin: 6px 0; padding: 13px 0; }
+  .marquee-item,
+  .marquee-item .marquee-text { font-size: 20px; }
+  .marquee-item { gap: 14px; }
+  .marquee-track { gap: 14px; }
+  .marquee-item .star { width: 14px; height: 14px; }
+  #event { padding-bottom: 36px; }
+  .travel-section { padding-top: 48px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee { transform: none; }
+}
+
+/* ---------- 10. Travel & location ---------- */
+.travel-frame {
+  border-radius: 0;
+  border: 2px solid var(--ink);
+  box-shadow: 10px 10px 0 0 var(--ink);
+}
+.travel-display {
+  font-size: clamp(38px, 5vw, 72px) !important;
+  line-height: 1.08 !important;
+  white-space: normal !important;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.travel-closer {
+  font-size: clamp(20px, 2vw, 26px);
+  color: var(--accent);
+}
+@media (max-width: 768px) {
+  .travel-frame { box-shadow: 6px 6px 0 0 var(--ink); }
+}
+
+/* ---------- 11. Archive timeline ---------- */
+.timeline-card--linked:hover {
+  box-shadow: 7px 7px 0 0 var(--accent);
+  border-color: var(--ink);
+}
+.timeline-name { font-size: 26px; }
+.timeline-date { font-size: 15px; }
+.timeline-flag { box-shadow: 2px 2px 0 0 rgba(10, 10, 10, 0.7); }
+/* terminus: full red destination panel */
+.timeline-terminus {
+  background: var(--accent);
+  box-shadow: 8px 8px 0 0 var(--ink);
+}
+.timeline-terminus-eyebrow { color: var(--paper); opacity: 0.85; }
+.timeline-terminus-meta { color: rgba(255, 247, 245, 0.85); }
+.timeline-terminus-cta {
+  background: var(--ink);
+  box-shadow: 4px 4px 0 0 rgba(10, 10, 10, 0.55);
+  transition: transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              background 180ms;
+}
+.timeline-terminus-cta:hover {
+  background: var(--color-black);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 rgba(10, 10, 10, 0.55);
+}
+.timeline-dot--terminus { background: var(--accent); border-color: var(--ink); }
+
+/* ---------- 12. Ambassador strip + footer ---------- */
+.ambassador-strip {
+  border-top: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+}
+.ambassador-strip-btn {
+  border-radius: 0;
+  box-shadow: 4px 4px 0 0 rgba(10, 10, 10, 0.8);
+}
+.footer { border-top: 4px solid var(--accent); }
+.footer .signoff {
+  font-family: "SquidBoy", "Lenia Sans", sans-serif;
+  font-weight: 300;
+  font-size: 17px;
+  color: var(--accent);
+}
+.footer-social {
+  transition: color 180ms ease, transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.footer-social:hover { color: var(--accent); transform: translateY(-3px); }
+
