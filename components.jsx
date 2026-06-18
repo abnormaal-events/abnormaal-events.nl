@@ -58,16 +58,6 @@ const Nav = () => {
         <a href="about.html">about</a>
         <a href="lineup.html">line-up</a>
         <a href="index.html#archive">past events</a>
-        <a
-          href="#"
-          data-tally-open="QKkM2g"
-          data-tally-emoji-text="👋"
-          data-tally-emoji-animation="wave"
-          className="nav-ambassador"
-          onClick={(e) => e.preventDefault()}>
-          <span className="nav-ambassador-emoji" aria-hidden="true">👋</span>
-          <span>ambassador</span>
-        </a>
       </div>
       <a className="nav-cta-circle" href="tickets.html" aria-label="Get ticket">
         <span className="nav-cta-circle-text" aria-hidden="true">
@@ -122,15 +112,6 @@ const MobileMenu = ({ isOpen, onClose }) => {
         {items.map((it) => (
           <a key={it.href} href={it.href} onClick={onClose}>{it.label}</a>
         ))}
-        <a
-          className="menu-ambassador"
-          href="#"
-          data-tally-open="QKkM2g"
-          data-tally-emoji-text="👋"
-          data-tally-emoji-animation="wave"
-          onClick={(e) => { e.preventDefault(); onClose(); }}>
-          ambassador
-        </a>
         <a className="mobile-menu-cta" href="tickets.html" onClick={onClose}>
           get tickets
           <svg width="18" height="18" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -274,7 +255,7 @@ const NextEvent = () => {
             <div className="ticket-tier-grid">
               {[
                 { tier: "Blind Tickets", price: "€44,95", status: "sold_out" },
-                { tier: "Early Bird",    price: "€49,95", status: "almost" },
+                { tier: "Early Bird",    price: "€49,95", status: "sold_out" },
                 { tier: "Regular Bird",  price: "€54,95", status: "available" },
                 { tier: "Late Bird",     price: "€59,95", status: "available" },
               ].map((t) => {
@@ -755,21 +736,4 @@ const HeroMarquee = () => (
   </div>
 );
 
-const AmbassadorStrip = () => (
-  <section className="ambassador-strip" aria-label="Become an ambassador">
-    <div className="ambassador-strip-inner">
-      <p className="ambassador-strip-eyebrow">Want to be part of it?</p>
-      <p className="ambassador-strip-body">Become an ambassador and bring the crew.</p>
-      <button
-        type="button"
-        data-tally-open="QKkM2g"
-        data-tally-emoji-text="👋"
-        data-tally-emoji-animation="wave"
-        className="ambassador-strip-btn">
-        Become an ambassador <span className="wave-emoji" aria-hidden="true">👋</span>
-      </button>
-    </div>
-  </section>
-);
-
-Object.assign(window, { Nav, Hero, DateStrip, NextEvent, Marquee, Manifesto, About, TravelLocation, Archive, HeroMarquee, Footer, AmbassadorStrip });
+Object.assign(window, { Nav, Hero, DateStrip, NextEvent, Marquee, Manifesto, About, TravelLocation, Archive, HeroMarquee, Footer });
