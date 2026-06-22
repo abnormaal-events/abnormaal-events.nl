@@ -1,7 +1,8 @@
 /* Line-up 2026 — full page components */
 
 const LINEUP_ARTISTS = [
-  { id: 1,  name: "MISS K8",              role: "hard closing", stage: "VIPER HARD AREA", bio: "", image: "assets/lineup/miss-k8.png" },
+  { id: 1,  name: "MISS K8",              role: "hard closing", stage: "VIPER HARD AREA", headliner: true, bio: "", image: "assets/lineup/miss-k8.png" },
+  { id: 15, name: "MORGAN SEATREE",       role: "",        stage: "BOOST ARENA",     headliner: true, bio: "", image: "assets/lineup/morgan-seatree.png" },
   { id: 2,  name: "CLAESSENS",            role: "",        stage: "VIPER HARD AREA", bio: "", image: "assets/lineup/claessens.png" },
   { id: 3,  name: "MICHEL DE HEY",        role: "",        stage: "BOOST ARENA",     bio: "", image: "assets/lineup/michel-de-hey.png" },
   { id: 4,  name: "D|K|OXY",              role: "",        stage: "VIPER HARD AREA", bio: "", image: "assets/lineup/dkoxy.png" },
@@ -172,7 +173,7 @@ const ArtistTile = ({ artist }) => {
   const sizeClass = getNameSizeClass(artist.name);
   return (
     <article
-      className={"artist-card artist-card-equal" + (failed ? ' artist-card--placeholder' : '')}
+      className={"artist-card artist-card-equal" + (artist.headliner ? ' artist-card--headliner' : '') + (failed ? ' artist-card--placeholder' : '')}
       data-stage={artist.stage}
       style={hidden ? { display: 'none' } : undefined}
     >
