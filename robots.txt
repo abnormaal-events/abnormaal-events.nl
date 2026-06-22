@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+Allow: /assets/favicon/
+Allow: /assets/og-image.jpg
 Disallow: /assets/
 
 Sitemap: https://abnormaal-events.nl/sitemap.xml
