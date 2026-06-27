@@ -204,7 +204,7 @@ const Hero = () => {
 const DateStrip = () => <div className="date-strip" style={{ backgroundColor: "rgb(214, 0, 0)" }}>
     <div className="date-strip-inner">
       <span>SAT, SEP 5TH, 2026</span>
-      <span className="squid">Natuurstrook A1 · Apeldoorn</span>
+      <span className="squid">Mheenpark · Apeldoorn</span>
       <span>13:00 — 00:00</span>
       <span className="squid">two stages</span>
       <span>18+ only</span>
@@ -249,7 +249,7 @@ const NextEvent = () => {
             <div className="event-meta-stack">
               <div className="meta-row"><span className="k">date</span><span className="v">Sat, September 5th, 2026</span></div>
               <div className="meta-row"><span className="k">hours</span><span className="v">13:00 - 00:00</span></div>
-              <div className="meta-row"><span className="k">venue</span><span className="v">Natuurstrook A1 · Apeldoorn</span></div>
+              <div className="meta-row"><span className="k">venue</span><span className="v">Mheenpark · Apeldoorn</span></div>
               <div className="meta-row"><span className="k">stages</span><span className="v">02 — house & techno</span></div>
             </div>
             <div className="ticket-tier-grid">
@@ -403,24 +403,24 @@ const TravelLocation = () => {
       <div className="shell">
         <div className="section-header">
           <div className="section-label"><span className="num squid accent-squid">02</span>TRAVEL &amp; LOCATION</div>
-          <h2 className="sr-only">Locatie: Natuurstrook A1, Apeldoorn</h2>
-          <div className="section-title">— natuurstrook A1</div>
+          <h2 className="sr-only">Locatie: Mheenpark, Apeldoorn</h2>
+          <div className="section-title">— mheenpark</div>
         </div>
         <div className="travel-frame">
           <img
             className="travel-drone"
-            src="assets/photos/location-drone.png"
-            alt="Festival locatie Natuurstrook A1 Apeldoorn vanuit de lucht — outdoor house en techno festival"
+            src="assets/photos/location-mheenpark.jpg"
+            alt="Festival locatie Mheenpark Apeldoorn vanuit de lucht — outdoor house en techno festival"
             loading="lazy" />
         </div>
         <div className="travel-copy">
           <h3 ref={headingRef} className="travel-display travel-heading">
-            <span className="phrase">Not a park.</span>
-            <span className="phrase">Not a meadow.</span>
-            <span className="phrase">Not a stadium.</span>
+            <span className="phrase">You've walked it.</span>
+            <span className="phrase">You've passed it.</span>
+            <span className="phrase">Now you'll feel it.</span>
           </h3>
-          <p className="travel-body-text">A green strip of land in the south of Apeldoorn, wedged between industry and a highway. Most days, nothing happens here. On September 5th, thousands of people, two stages, and a sound system that fills the sky.</p>
-          <p className="travel-closer"><em>Find us where Apeldoorn forgets to look.</em></p>
+          <p className="travel-body-text">Mheenpark. Green, open, right in the middle of Apeldoorn. A place the whole city knows, but has never seen like this. On September 5th we turn it into two stages, thousands of people, and a sound system that fills the trees.</p>
+          <p className="travel-closer"><em>The city's backyard. For one day, it's ours.</em></p>
         </div>
       </div>
     </section>
@@ -533,7 +533,7 @@ const Archive = () => {
               <div className="timeline-terminus-meta">
                 <span>September 5th, 2026</span>
                 <span className="dot" aria-hidden="true">·</span>
-                <span>Natuurstrook A1, Apeldoorn</span>
+                <span>Mheenpark, Apeldoorn</span>
               </div>
               <a href="tickets.html" className="timeline-terminus-cta">
                 <span>tickets</span><span className="arrow">→</span>

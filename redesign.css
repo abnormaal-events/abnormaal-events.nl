@@ -465,8 +465,8 @@ html, body { overflow-x: clip; }
   font-size: clamp(38px, 5vw, 72px) !important;
   line-height: 1.08 !important;
   white-space: normal !important;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-weight: 300;
+  letter-spacing: 0;
 }
 .travel-closer {
   font-size: clamp(20px, 2vw, 26px);
