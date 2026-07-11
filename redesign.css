@@ -88,6 +88,36 @@
   .hero-dj-x { font-size: 15px; }
 }
 
+/* Cancellation message — single centered line over the hero image */
+.hero-festival-logo--cancel {
+  max-width: min(460px, 46vw);
+  margin: 0 auto 8px;
+}
+@media (max-width: 768px) {
+  .hero-festival-logo--cancel { max-width: 76vw; }
+}
+.hero-cancel-message {
+  font-family: "SquidBoy", "Lenia Sans", sans-serif;
+  font-weight: 400;
+  color: #ffffff;
+  text-align: center;
+  font-size: clamp(24px, 3.6vw, 46px);
+  line-height: 1.3;
+  letter-spacing: 0.005em;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-wrap: balance;
+  text-shadow: 0 2px 24px rgba(20, 0, 40, 0.45);
+}
+@media (max-width: 768px) {
+  .hero-cancel-message {
+    font-size: clamp(24px, 6.6vw, 28px);
+    max-width: 100%;
+    padding: 0 8px;
+  }
+}
+
 /* hero info line — display voice, but in proportion */
 .hero-info-line {
   font-family: "SquidBoy", "Lenia Sans", sans-serif;

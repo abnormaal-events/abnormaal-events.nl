@@ -56,24 +56,8 @@ const Nav = () => {
       </a>
       <div className="nav-links">
         <a href="about.html">about</a>
-        <a href="lineup.html">line-up</a>
         <a href="index.html#archive">past events</a>
       </div>
-      <a className="nav-cta-circle" href="tickets.html" aria-label="Get ticket">
-        <span className="nav-cta-circle-text" aria-hidden="true">
-          {"TICKETS·TICKETS·TICKETS·".split("").map((ch, i) =>
-            <span key={i} style={{ "--index": i }}>{ch}</span>
-            )}
-        </span>
-        <span className="nav-cta-circle-inner">
-          <svg className="nav-cta-circle-icon" width="16" height="16" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-            <path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="square" />
-          </svg>
-          <svg className="nav-cta-circle-icon nav-cta-circle-icon--copy" width="16" height="16" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-            <path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="square" />
-          </svg>
-        </span>
-      </a>
       <button
           className="nav-burger"
           type="button"
@@ -94,7 +78,6 @@ const MobileMenu = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
   const items = [
     { label: "about", href: "about.html" },
-    { label: "line-up", href: "lineup.html" },
     { label: "past events", href: "index.html#archive" },
   ];
   return (
@@ -112,12 +95,6 @@ const MobileMenu = ({ isOpen, onClose }) => {
         {items.map((it) => (
           <a key={it.href} href={it.href} onClick={onClose}>{it.label}</a>
         ))}
-        <a className="mobile-menu-cta" href="tickets.html" onClick={onClose}>
-          get tickets
-          <svg width="18" height="18" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-            <path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="square" />
-          </svg>
-        </a>
       </nav>
     </div>
   );
@@ -152,50 +129,21 @@ const Hero = () => {
     <div className="hero-bg"></div>
     <div className="shell hero-inner">
       <div className="hero-stage">
-        <h1 className="sr-only">ABNØRMAAL Festival — House &amp; Techno Festival Apeldoorn 2026</h1>
+        <h1 className="sr-only">ABNØRMAAL — Dance Events Netherlands</h1>
         <video
         autoPlay
         muted
         playsInline
         poster="assets/logos/festival-logo-white.png"
-        className="hero-festival-logo"
+        className="hero-festival-logo hero-festival-logo--cancel"
         aria-label="Abnormaal Festival"
-        style={{ opacity: "1", margin: "3px", objectFit: "contain", width: "100%", mixBlendMode: "screen" }}>
+        style={{ opacity: "1", objectFit: "contain", width: "100%", mixBlendMode: "screen" }}>
           <source src="assets/logos/festival_logo.mov" type="video/quicktime; codecs=hvc1" />
           <source src="assets/logos/festival_logo.webm" type="video/webm" />
         </video>
-        <div className="hero-actions">
-          <a href="tickets.html" className="hero-btn hero-btn--primary" onClick={() => {
-            if (typeof fbq !== 'undefined') {
-              fbq('track', 'ViewContent', { content_name: 'tickets_cta' });
-            }
-            if (typeof ttq !== 'undefined') {
-              ttq.track('ClickButton', { content_name: 'tickets_cta' });
-            }
-          }}>
-            <span className="hero-btn-glow" aria-hidden="true"></span>
-            <span className="hero-btn-inner">
-              <span>Tickets</span>
-              <svg width="16" height="16" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="square" /></svg>
-            </span>
-          </a>
-          <a href="lineup.html" className="hero-btn hero-btn--ghost">
-            <span className="hero-btn-inner">
-              <span>Line-up</span>
-              <svg width="16" height="16" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="square" /></svg>
-            </span>
-          </a>
-        </div>
-        <div className="hero-info-line">
-          <span>SEP 5, 2026</span>
-          <span className="hero-info-dot" aria-hidden="true">·</span>
-          <span>APELDOORN</span>
-          <span className="hero-info-dot" aria-hidden="true">·</span>
-          <span>HOUSE × TECHNO</span>
-        </div>
+        <p className="hero-cancel-message">Despite everything we had planned, we've had to make the difficult decision to cancel the festival.</p>
       </div>
     </div>
-    <HeroMarquee />
     <div className="hero-chain"></div>
   </section>
   );
@@ -520,26 +468,6 @@ const Archive = () => {
               )}
             </li>
           ))}
-
-          <li className="timeline-item timeline-item--terminus">
-            <div className="timeline-rail" aria-hidden="true">
-              <span className="timeline-dot timeline-dot--terminus">
-                <span className="timeline-dot-num squid">06</span>
-              </span>
-            </div>
-            <div className="timeline-terminus">
-              <div className="timeline-terminus-eyebrow squid accent-squid">final destination</div>
-              <h3 className="timeline-terminus-title">ABNORMAAL<br />FESTIVAL</h3>
-              <div className="timeline-terminus-meta">
-                <span>September 5th, 2026</span>
-                <span className="dot" aria-hidden="true">·</span>
-                <span>Mheenpark, Apeldoorn</span>
-              </div>
-              <a href="tickets.html" className="timeline-terminus-cta">
-                <span>tickets</span><span className="arrow">→</span>
-              </a>
-            </div>
-          </li>
         </ol>
       </div>
     </section>);
@@ -561,10 +489,9 @@ const Footer = () =>
           </div>
         </div>
         <div className="footer-col">
-          <h4>Festival</h4>
+          <h4>Explore</h4>
           <ul>
-            <li><a href="#event">Lineup</a></li>
-            <li><a href="tickets.html">Tickets</a></li>
+            <li><a href="about.html">About</a></li>
             <li><a href="index.html#archive">Past editions</a></li>
           </ul>
         </div>

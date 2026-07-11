@@ -1,0 +1,24 @@
+{
+  "redirects": [
+    {
+      "source": "/lineup.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tickets.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/lineup",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tickets",
+      "destination": "/",
+      "permanent": true
+    }
+  ]
+}
