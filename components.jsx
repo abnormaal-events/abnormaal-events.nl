@@ -9,7 +9,11 @@ const Nav = () => {
     let ticking = false;
     const update = () => {
       const y = window.scrollY;
-      setScrolled(y > 8);
+      // Keep the nav transparent (cream logo) across the whole hero; only
+      // flip to the light state once the cream sections below start.
+      const hero = document.querySelector('.hero');
+      const flipAt = hero ? Math.max(80, hero.offsetHeight - 90) : 8;
+      setScrolled(y > flipAt);
       // Hide on scroll-down past threshold; show on scroll-up.
       // Only auto-hide on mobile (≤900px) or on the tickets page.
       const isTickets = document.body.getAttribute('data-screen-label') === 'Tickets page' ||
@@ -100,7 +104,18 @@ const MobileMenu = ({ isOpen, onClose }) => {
   );
 };
 
+const EVENT_CTA_URL = "https://drop.cobrand.com/d/MichelDeHey/Abnormaal-summernights";
+const EVENT_CTA_LABEL = "Pre-register now";
+
 const Hero = () => {
+  const [stuck, setStuck] = React.useState(false);
+  React.useEffect(() => {
+    const btn = document.querySelector('.phl-cta');
+    if (!btn || !('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver(([e]) => setStuck(!e.isIntersecting), { threshold: 0 });
+    io.observe(btn);
+    return () => io.disconnect();
+  }, []);
   React.useEffect(() => {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -125,26 +140,43 @@ const Hero = () => {
     };
   }, []);
   return (
-<section className="hero" id="top">
-    <div className="hero-bg"></div>
+<section className="hero hero--phl" id="top">
+    <div className="hero-bg hero-bg--phl"></div>
     <div className="shell hero-inner">
       <div className="hero-stage">
-        <h1 className="sr-only">ABNØRMAAL — Dance Events Netherlands</h1>
-        <video
-        autoPlay
-        muted
-        playsInline
-        poster="assets/logos/festival-logo-white.png"
-        className="hero-festival-logo hero-festival-logo--cancel"
-        aria-label="Abnormaal Festival"
-        style={{ opacity: "1", objectFit: "contain", width: "100%", mixBlendMode: "screen" }}>
-          <source src="assets/logos/festival_logo.mov" type="video/quicktime; codecs=hvc1" />
-          <source src="assets/logos/festival_logo.webm" type="video/webm" />
-        </video>
-        <p className="hero-cancel-message">Despite everything we had planned, we've had to make the difficult decision to cancel the festival.</p>
+        <h1 className="sr-only">Summer Nights x ABNØRMAAL x Michel de Hey &amp; Friends — Paleis Het Loo, 4 september 2026</h1>
+        <img
+          src="assets/logos/phl-summer-nights-lockup.png"
+          alt="Summer Nights — Paleis Het Loo x ABNØRMAAL"
+          className="phl-lockup" />
+        <img
+          src="assets/logos/mdh-friends-wordmark.png"
+          alt="Michel de Hey &amp; Friends op het bordes van Paleis Het Loo"
+          className="phl-wordmark" />
+        <div className="phl-lineup">
+          <span className="phl-lineup-label">a - z</span>
+          <span className="phl-lineup-name">CONCEPT</span>
+          <span className="phl-lineup-name">Michel de Hey</span>
+          <span className="phl-lineup-name">Violet B2B Nino Wattimena</span>
+        </div>
+        <p className="phl-practical">PALEIS HET LOO · 4 SEPTEMBER · 18:30 - 21:30</p>
+        <a
+          className="event-cta-btn phl-cta"
+          href={EVENT_CTA_URL}
+          target="_blank"
+          rel="noopener noreferrer">{EVENT_CTA_LABEL}</a>
+        <p className="phl-cta-note">Tickets go on sale Thursday 12:00.<br />Pre-registered guests get the link first.</p>
       </div>
+      <p className="phl-presenter">PRESENTED BY PALEIS HET LOO · SUMMER NIGHTS X EARTH WATER</p>
     </div>
-    <div className="hero-chain"></div>
+    <div className={"event-cta-sticky" + (stuck ? " is-visible" : "")} aria-hidden={stuck ? "false" : "true"}>
+      <a
+        className="event-cta-btn"
+        href={EVENT_CTA_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        tabIndex={stuck ? 0 : -1}>{EVENT_CTA_LABEL}</a>
+    </div>
   </section>
   );
 };
