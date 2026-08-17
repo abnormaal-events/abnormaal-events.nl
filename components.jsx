@@ -9,7 +9,11 @@ const Nav = () => {
     let ticking = false;
     const update = () => {
       const y = window.scrollY;
-      setScrolled(y > 8);
+      // Keep the nav transparent (cream logo) across the whole hero; only
+      // flip to the light state once the cream sections below start.
+      const hero = document.querySelector('.hero');
+      const flipAt = hero ? Math.max(80, hero.offsetHeight - 90) : 8;
+      setScrolled(y > flipAt);
       // Hide on scroll-down past threshold; show on scroll-up.
       // Only auto-hide on mobile (≤900px) or on the tickets page.
       const isTickets = document.body.getAttribute('data-screen-label') === 'Tickets page' ||
@@ -56,34 +60,8 @@ const Nav = () => {
       </a>
       <div className="nav-links">
         <a href="about.html">about</a>
-        <a href="lineup.html">line-up</a>
         <a href="index.html#archive">past events</a>
-        <a
-          href="#"
-          data-tally-open="QKkM2g"
-          data-tally-emoji-text="👋"
-          data-tally-emoji-animation="wave"
-          className="nav-ambassador"
-          onClick={(e) => e.preventDefault()}>
-          <span className="nav-ambassador-emoji" aria-hidden="true">👋</span>
-          <span>ambassador</span>
-        </a>
       </div>
-      <a className="nav-cta-circle" href="tickets.html" aria-label="Get ticket">
-        <span className="nav-cta-circle-text" aria-hidden="true">
-          {"TICKETS·TICKETS·TICKETS·".split("").map((ch, i) =>
-            <span key={i} style={{ "--index": i }}>{ch}</span>
-            )}
-        </span>
-        <span className="nav-cta-circle-inner">
-          <svg className="nav-cta-circle-icon" width="16" height="16" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-            <path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="square" />
-          </svg>
-          <svg className="nav-cta-circle-icon nav-cta-circle-icon--copy" width="16" height="16" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-            <path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="square" />
-          </svg>
-        </span>
-      </a>
       <button
           className="nav-burger"
           type="button"
@@ -104,7 +82,6 @@ const MobileMenu = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
   const items = [
     { label: "about", href: "about.html" },
-    { label: "line-up", href: "lineup.html" },
     { label: "past events", href: "index.html#archive" },
   ];
   return (
@@ -122,27 +99,23 @@ const MobileMenu = ({ isOpen, onClose }) => {
         {items.map((it) => (
           <a key={it.href} href={it.href} onClick={onClose}>{it.label}</a>
         ))}
-        <a
-          className="menu-ambassador"
-          href="#"
-          data-tally-open="QKkM2g"
-          data-tally-emoji-text="👋"
-          data-tally-emoji-animation="wave"
-          onClick={(e) => { e.preventDefault(); onClose(); }}>
-          ambassador
-        </a>
-        <a className="mobile-menu-cta" href="tickets.html" onClick={onClose}>
-          get tickets
-          <svg width="18" height="18" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-            <path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="square" />
-          </svg>
-        </a>
       </nav>
     </div>
   );
 };
 
+const EVENT_CTA_URL = "https://drop.cobrand.com/d/MichelDeHey/Abnormaal-summernights";
+const EVENT_CTA_LABEL = "Pre-register now";
+
 const Hero = () => {
+  const [stuck, setStuck] = React.useState(false);
+  React.useEffect(() => {
+    const btn = document.querySelector('.phl-cta');
+    if (!btn || !('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver(([e]) => setStuck(!e.isIntersecting), { threshold: 0 });
+    io.observe(btn);
+    return () => io.disconnect();
+  }, []);
   React.useEffect(() => {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -167,55 +140,43 @@ const Hero = () => {
     };
   }, []);
   return (
-<section className="hero" id="top">
-    <div className="hero-bg"></div>
+<section className="hero hero--phl" id="top">
+    <div className="hero-bg hero-bg--phl"></div>
     <div className="shell hero-inner">
       <div className="hero-stage">
-        <h1 className="sr-only">ABNØRMAAL Festival — House &amp; Techno Festival Apeldoorn 2026</h1>
-        <video
-        autoPlay
-        muted
-        playsInline
-        poster="assets/logos/festival-logo-white.png"
-        className="hero-festival-logo"
-        aria-label="Abnormaal Festival"
-        style={{ opacity: "1", margin: "3px", objectFit: "contain", width: "100%", mixBlendMode: "screen" }}>
-          <source src="assets/logos/festival_logo.mov" type="video/quicktime; codecs=hvc1" />
-          <source src="assets/logos/festival_logo.webm" type="video/webm" />
-        </video>
-        <div className="hero-actions">
-          <a href="tickets.html" className="hero-btn hero-btn--primary" onClick={() => {
-            if (typeof fbq !== 'undefined') {
-              fbq('track', 'ViewContent', { content_name: 'tickets_cta' });
-            }
-            if (typeof ttq !== 'undefined') {
-              ttq.track('ClickButton', { content_name: 'tickets_cta' });
-            }
-          }}>
-            <span className="hero-btn-glow" aria-hidden="true"></span>
-            <span className="hero-btn-inner">
-              <span>Tickets</span>
-              <svg width="16" height="16" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="square" /></svg>
-            </span>
-          </a>
-          <a href="lineup.html" className="hero-btn hero-btn--ghost">
-            <span className="hero-btn-inner">
-              <span>Line-up</span>
-              <svg width="16" height="16" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="square" /></svg>
-            </span>
-          </a>
+        <h1 className="sr-only">Summer Nights x ABNØRMAAL x Michel de Hey &amp; Friends — Paleis Het Loo, 4 september 2026</h1>
+        <img
+          src="assets/logos/phl-summer-nights-lockup.png"
+          alt="Summer Nights — Paleis Het Loo x ABNØRMAAL"
+          className="phl-lockup" />
+        <img
+          src="assets/logos/mdh-friends-wordmark.png"
+          alt="Michel de Hey &amp; Friends op het bordes van Paleis Het Loo"
+          className="phl-wordmark" />
+        <div className="phl-lineup">
+          <span className="phl-lineup-label">a - z</span>
+          <span className="phl-lineup-name">CONCEPT</span>
+          <span className="phl-lineup-name">Michel de Hey</span>
+          <span className="phl-lineup-name">Violet B2B Nino Wattimena</span>
         </div>
-        <div className="hero-info-line">
-          <span>SEP 5, 2026</span>
-          <span className="hero-info-dot" aria-hidden="true">·</span>
-          <span>APELDOORN</span>
-          <span className="hero-info-dot" aria-hidden="true">·</span>
-          <span>HOUSE × TECHNO</span>
-        </div>
+        <p className="phl-practical">PALEIS HET LOO · 4 SEPTEMBER · 18:30 - 21:30</p>
+        <a
+          className="event-cta-btn phl-cta"
+          href={EVENT_CTA_URL}
+          target="_blank"
+          rel="noopener noreferrer">{EVENT_CTA_LABEL}</a>
+        <p className="phl-cta-note">Tickets go on sale Thursday 12:00.<br />Pre-registered guests get the link first.</p>
       </div>
+      <p className="phl-presenter">PRESENTED BY PALEIS HET LOO · SUMMER NIGHTS X EARTH WATER</p>
     </div>
-    <HeroMarquee />
-    <div className="hero-chain"></div>
+    <div className={"event-cta-sticky" + (stuck ? " is-visible" : "")} aria-hidden={stuck ? "false" : "true"}>
+      <a
+        className="event-cta-btn"
+        href={EVENT_CTA_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        tabIndex={stuck ? 0 : -1}>{EVENT_CTA_LABEL}</a>
+    </div>
   </section>
   );
 };
@@ -223,7 +184,7 @@ const Hero = () => {
 const DateStrip = () => <div className="date-strip" style={{ backgroundColor: "rgb(214, 0, 0)" }}>
     <div className="date-strip-inner">
       <span>SAT, SEP 5TH, 2026</span>
-      <span className="squid">Natuurstrook A1 · Apeldoorn</span>
+      <span className="squid">Mheenpark · Apeldoorn</span>
       <span>13:00 — 00:00</span>
       <span className="squid">two stages</span>
       <span>18+ only</span>
@@ -249,7 +210,7 @@ const NextEvent = () => {
                 {[
                   "BLNK", "BURNR", "CLAESSENS", "CONCEPT", "D|K|OXY", "D STONE",
                   "FREDDI B2B KARA OKAY", "IOSIO", "JO3Y3T", "MICHEL DE HEY",
-                  "MISS K8", "MOODY MEHRAN", "SASHE", "TITI"
+                  "MISS K8", "MOODY MEHRAN", "MORGAN SEATREE", "SASHE", "TITI"
                 ].map((name, i, arr) => (
                   <span key={name} className="lineup-item">
                     <span className="lineup-name">{name}</span>
@@ -268,13 +229,13 @@ const NextEvent = () => {
             <div className="event-meta-stack">
               <div className="meta-row"><span className="k">date</span><span className="v">Sat, September 5th, 2026</span></div>
               <div className="meta-row"><span className="k">hours</span><span className="v">13:00 - 00:00</span></div>
-              <div className="meta-row"><span className="k">venue</span><span className="v">Natuurstrook A1 · Apeldoorn</span></div>
+              <div className="meta-row"><span className="k">venue</span><span className="v">Mheenpark · Apeldoorn</span></div>
               <div className="meta-row"><span className="k">stages</span><span className="v">02 — house & techno</span></div>
             </div>
             <div className="ticket-tier-grid">
               {[
                 { tier: "Blind Tickets", price: "€44,95", status: "sold_out" },
-                { tier: "Early Bird",    price: "€49,95", status: "almost" },
+                { tier: "Early Bird",    price: "€49,95", status: "sold_out" },
                 { tier: "Regular Bird",  price: "€54,95", status: "available" },
                 { tier: "Late Bird",     price: "€59,95", status: "available" },
               ].map((t) => {
@@ -422,24 +383,24 @@ const TravelLocation = () => {
       <div className="shell">
         <div className="section-header">
           <div className="section-label"><span className="num squid accent-squid">02</span>TRAVEL &amp; LOCATION</div>
-          <h2 className="sr-only">Locatie: Natuurstrook A1, Apeldoorn</h2>
-          <div className="section-title">— natuurstrook A1</div>
+          <h2 className="sr-only">Locatie: Mheenpark, Apeldoorn</h2>
+          <div className="section-title">— mheenpark</div>
         </div>
         <div className="travel-frame">
           <img
             className="travel-drone"
-            src="assets/photos/location-drone.png"
-            alt="Festival locatie Natuurstrook A1 Apeldoorn vanuit de lucht — outdoor house en techno festival"
+            src="assets/photos/location-mheenpark.jpg"
+            alt="Festival locatie Mheenpark Apeldoorn vanuit de lucht — outdoor house en techno festival"
             loading="lazy" />
         </div>
         <div className="travel-copy">
           <h3 ref={headingRef} className="travel-display travel-heading">
-            <span className="phrase">Not a park.</span>
-            <span className="phrase">Not a meadow.</span>
-            <span className="phrase">Not a stadium.</span>
+            <span className="phrase">You've walked it.</span>
+            <span className="phrase">You've passed it.</span>
+            <span className="phrase">Now you'll feel it.</span>
           </h3>
-          <p className="travel-body-text">A green strip of land in the south of Apeldoorn, wedged between industry and a highway. Most days, nothing happens here. On September 5th, thousands of people, two stages, and a sound system that fills the sky.</p>
-          <p className="travel-closer"><em>Find us where Apeldoorn forgets to look.</em></p>
+          <p className="travel-body-text">Mheenpark. Green, open, right in the middle of Apeldoorn. A place the whole city knows, but has never seen like this. On September 5th we turn it into two stages, thousands of people, and a sound system that fills the trees.</p>
+          <p className="travel-closer"><em>The city's backyard. For one day, it's ours.</em></p>
         </div>
       </div>
     </section>
@@ -539,26 +500,6 @@ const Archive = () => {
               )}
             </li>
           ))}
-
-          <li className="timeline-item timeline-item--terminus">
-            <div className="timeline-rail" aria-hidden="true">
-              <span className="timeline-dot timeline-dot--terminus">
-                <span className="timeline-dot-num squid">06</span>
-              </span>
-            </div>
-            <div className="timeline-terminus">
-              <div className="timeline-terminus-eyebrow squid accent-squid">final destination</div>
-              <h3 className="timeline-terminus-title">ABNORMAAL<br />FESTIVAL</h3>
-              <div className="timeline-terminus-meta">
-                <span>September 5th, 2026</span>
-                <span className="dot" aria-hidden="true">·</span>
-                <span>Natuurstrook A1, Apeldoorn</span>
-              </div>
-              <a href="tickets.html" className="timeline-terminus-cta">
-                <span>tickets</span><span className="arrow">→</span>
-              </a>
-            </div>
-          </li>
         </ol>
       </div>
     </section>);
@@ -580,10 +521,9 @@ const Footer = () =>
           </div>
         </div>
         <div className="footer-col">
-          <h4>Festival</h4>
+          <h4>Explore</h4>
           <ul>
-            <li><a href="#event">Lineup</a></li>
-            <li><a href="tickets.html">Tickets</a></li>
+            <li><a href="about.html">About</a></li>
             <li><a href="index.html#archive">Past editions</a></li>
           </ul>
         </div>
@@ -693,7 +633,7 @@ const Manifesto = () => {
 };
 
 const HERO_HOUSE_DJS = [
-  "MICHEL DE HEY", "D STONE", "MOODY MEHRAN", "BURNR",
+  "MORGAN SEATREE", "MICHEL DE HEY", "D STONE", "MOODY MEHRAN", "BURNR",
   "FREDDI B2B KARA OKAY", "IOSIO", "CONCEPT",
 ];
 const HERO_TECHNO_DJS = [
@@ -755,21 +695,4 @@ const HeroMarquee = () => (
   </div>
 );
 
-const AmbassadorStrip = () => (
-  <section className="ambassador-strip" aria-label="Become an ambassador">
-    <div className="ambassador-strip-inner">
-      <p className="ambassador-strip-eyebrow">Want to be part of it?</p>
-      <p className="ambassador-strip-body">Become an ambassador and bring the crew.</p>
-      <button
-        type="button"
-        data-tally-open="QKkM2g"
-        data-tally-emoji-text="👋"
-        data-tally-emoji-animation="wave"
-        className="ambassador-strip-btn">
-        Become an ambassador <span className="wave-emoji" aria-hidden="true">👋</span>
-      </button>
-    </div>
-  </section>
-);
-
-Object.assign(window, { Nav, Hero, DateStrip, NextEvent, Marquee, Manifesto, About, TravelLocation, Archive, HeroMarquee, Footer, AmbassadorStrip });
+Object.assign(window, { Nav, Hero, DateStrip, NextEvent, Marquee, Manifesto, About, TravelLocation, Archive, HeroMarquee, Footer });
