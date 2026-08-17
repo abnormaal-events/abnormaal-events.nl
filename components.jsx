@@ -104,7 +104,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
   );
 };
 
-const EVENT_CTA_URL = "https://drop.cobrand.com/d/MichelDeHey/Abnormaal-summernights";
+const EVENT_CTA_URL = "https://drop.cobrand.com/d/MichelDeHey/Abnormaal-PHL-summernights";
 const EVENT_CTA_LABEL = "Pre-register now";
 
 const Hero = () => {
