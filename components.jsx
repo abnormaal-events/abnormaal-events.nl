@@ -456,7 +456,7 @@ const Archive = () => {
     <section className="section archive-section" id="archive">
       <div className="shell">
         <div className="section-header">
-          <div className="section-label"><span className="num squid accent-squid">03</span>PAST EDITIONS</div>
+          <div className="section-label"><span className="num squid accent-squid"></span>PAST EDITIONS</div>
           <h2 className="sr-only">Past Editions van ABNØRMAAL Festival</h2>
           <div className="section-title">— the road so far</div>
         </div>
