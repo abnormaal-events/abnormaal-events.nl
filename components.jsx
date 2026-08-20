@@ -104,18 +104,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
   );
 };
 
-const EVENT_CTA_URL = "https://paleishetloo.nl/bezoek/agenda/summer-nights";
-const EVENT_CTA_LABEL = "Tickets";
-
 const Hero = () => {
-  const [stuck, setStuck] = React.useState(false);
-  React.useEffect(() => {
-    const btn = document.querySelector('.phl-cta');
-    if (!btn || !('IntersectionObserver' in window)) return;
-    const io = new IntersectionObserver(([e]) => setStuck(!e.isIntersecting), { threshold: 0 });
-    io.observe(btn);
-    return () => io.disconnect();
-  }, []);
   React.useEffect(() => {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -160,21 +149,9 @@ const Hero = () => {
           <span className="phl-lineup-name">Violet B2B Nino Wattimena</span>
         </div>
         <p className="phl-practical">PALEIS HET LOO · 4 SEPTEMBER · 18:30 - 21:30</p>
-        <a
-          className="event-cta-btn phl-cta"
-          href={EVENT_CTA_URL}
-          target="_blank"
-          rel="noopener noreferrer">{EVENT_CTA_LABEL}</a>
       </div>
+      <div className="phl-soldout" role="status"><span>Sold out</span></div>
       <p className="phl-presenter">PRESENTED BY PALEIS HET LOO · SUMMER NIGHTS X EARTH WATER</p>
-    </div>
-    <div className={"event-cta-sticky" + (stuck ? " is-visible" : "")} aria-hidden={stuck ? "false" : "true"}>
-      <a
-        className="event-cta-btn"
-        href={EVENT_CTA_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        tabIndex={stuck ? 0 : -1}>{EVENT_CTA_LABEL}</a>
     </div>
   </section>
   );
