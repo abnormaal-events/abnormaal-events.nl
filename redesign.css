@@ -610,15 +610,6 @@ html, body { overflow-x: clip; }
   text-transform: uppercase;
 }
 .phl-cta { margin: 40px 0 20px; max-width: 380px; padding: 16px 40px; }
-.phl-cta-note {
-  margin: 0;
-  font-family: "Lenia Sans", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #FFF8F0;
-  opacity: 0.7;
-  max-width: 44ch;
-}
 .phl-presenter {
   position: relative; z-index: 2;
   margin: 24px 0 0;
@@ -650,7 +641,6 @@ html, body { overflow-x: clip; }
   .phl-lineup-name { font-size: 17px; }
   .phl-practical { font-size: 14px; letter-spacing: 0.14em; }
   .phl-cta { margin: 26px 0 14px; width: 100%; max-width: 320px; }
-  .phl-cta-note { font-size: 13px; }
   .phl-presenter { font-size: 10px; margin-top: 18px; }
 }
 

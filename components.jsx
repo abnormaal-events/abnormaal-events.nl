@@ -104,8 +104,8 @@ const MobileMenu = ({ isOpen, onClose }) => {
   );
 };
 
-const EVENT_CTA_URL = "https://drop.cobrand.com/d/MichelDeHey/Abnormaal-PHL-summernights";
-const EVENT_CTA_LABEL = "Pre-register now";
+const EVENT_CTA_URL = "https://paleishetloo.nl/bezoek/agenda/summer-nights";
+const EVENT_CTA_LABEL = "Tickets";
 
 const Hero = () => {
   const [stuck, setStuck] = React.useState(false);
@@ -165,7 +165,6 @@ const Hero = () => {
           href={EVENT_CTA_URL}
           target="_blank"
           rel="noopener noreferrer">{EVENT_CTA_LABEL}</a>
-        <p className="phl-cta-note">Tickets go on sale Thursday 12:00.<br />Pre-registered guests get the link first.</p>
       </div>
       <p className="phl-presenter">PRESENTED BY PALEIS HET LOO · SUMMER NIGHTS X EARTH WATER</p>
     </div>
